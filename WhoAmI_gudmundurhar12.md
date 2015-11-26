@@ -17,7 +17,7 @@ Einnig hef ég unnið hin ýmsu störf, svo sem: slegið golfvelli, steikt hambo
 
 ##Something unexpected
 
-Ég á tvær dætur, 5 og 1 árs. Hef mikinn áhuga á tæknibrellum og CGI; og er mikill Fantasy/Scify nörd.
+Ég á tvær dætur, 5 og 1 árs. Hef mikinn áhuga á tæknibrellum og CGI.
 
 ##What kind of software person are you?
 
