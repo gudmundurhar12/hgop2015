@@ -9,10 +9,10 @@ Uppalinn á sveitabæ rétt fyrir innan Egilsstaði á Fljótsdalshéraði.
 ##Education and employment history
 
 Er að útskrifast með BSc í Tölvunarfræði næstkomandi vor.
-Ég útskrifaðist með Diploma í Kerfisfræði (heytir núna Dimploma í Tölvunarfræði) frá Háskólanum í Reykjavík vorið 2014 (einfaldlega svo að ég gæti útskrifast úr fjarnámi).
+Ég útskrifaðist með Diploma í Kerfisfræði (heitir núna Dimploma í Tölvunarfræði) frá Háskólanum í Reykjavík vorið 2014 (einfaldlega svo að ég gæti útskrifast úr fjarnámi).
 Útskrifaðist frá Menntaskólanum á Egilsstöðum jólin 2009.
 
-Hef ekkert starfað í hugbúnaðargeiranum en hef hinsvegar unnið hin ýmsu störf hjá Alcoa Fjarðaál, þar á meðl að starfa á rannsóknarstofunni, hjálpa til við að hanna og greyna breytingar á atvikaskráningarkerfinu þeirra (til að fá betri gögn) og starfað sem fyrirliði innan vakthóps í framleiðslu ferlinu í Skautsmiðjunni.
+Hef ekkert starfað í hugbúnaðargeiranum en hef hinsvegar unnið hin ýmsu störf hjá Alcoa Fjarðaál, þar á meðal að starfa á rannsóknarstofunni, hjálpa til við að hanna og þarfa greyna breytingar á atvikaskráningarkerfinu þeirra (til að fá betri gögn) og starfað sem fyrirliði innan vakthóps í framleiðslu ferlinu í Skautsmiðjunni.
 Einnig hef ég unnið hin ýmsu störf, svo sem: slegið golfvelli, steikt hamborgara og leyst af sem tæknimaður í útvarpi. 
 
 ##Something unexpected
