@@ -22,3 +22,8 @@ Node.js er cross-platform umhverfi til að skrifa og þróa vefþjónustur í Ja
 ##bower
 
 Bower er sambærilegt tól við npm en er fyrir JavaScript. Þ.e. það einfaldar og sjálvirknivæðir utanumhald og uppsetningu á JavaScript pökkum.  
+
+## Deployment path topology
+
+Eins og verkefnið er núna þú eru tvær virtual vélar keyrandi, ein dev vél og svo önnur test vél.
+Hægt er að keyra test_deploy.sh script til að setja nýjustu útgáfu af docker mynd inn á dockerhup, ssh-að inn á test vélina og nýjasta útgáfa af docker myndinni sótt og sett up.
