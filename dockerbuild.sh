@@ -28,6 +28,7 @@ rm -rf ./dist
 
 echo Building app
 grunt
+[ $? -eq 0 ] || exit $?
 
 cp ./Dockerfile ./dist/
 
@@ -36,6 +37,7 @@ npm install --production
 
 echo Building docker image
 docker build -t hardag/tictactoe .
+[ $? -eq 0 ] || exit $?
 
 echo "Done"
 @
