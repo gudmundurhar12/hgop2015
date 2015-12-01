@@ -4,13 +4,13 @@ echo Starting Docker
 sudo service docker start
 [ $? -eq 0 ] || exit $?
 
-echo NPM Install
-sudo npm install
-[ $? -eq 0 ] || exit $?
+# echo NPM Install
+# sudo npm install
+# [ $? -eq 0 ] || exit $?
 
-echo Bower Install
-bower install
-[ $? -eq 0 ] || exit $?
+# echo Bower Install
+# bower install
+# [ $? -eq 0 ] || exit $?
 
 echo Cleaning...
 rm -rf ./dist
