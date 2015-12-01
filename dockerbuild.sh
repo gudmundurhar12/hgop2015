@@ -1,5 +1,17 @@
 #!/bin/bash
 
+echo Starting Docker
+sudo service docker start
+[ $? -eq 0 ] || exit $?
+
+echo NPM Install
+npm install
+[ $? -eq 0 ] || exit $?
+
+echo Bower Install
+bower install
+[ $? -eq 0 ] || exit $?
+
 echo Cleaning...
 rm -rf ./dist
 
