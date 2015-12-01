@@ -9,7 +9,7 @@ sudo npm install
 [ $? -eq 0 ] || exit $?
 
 echo Bower Install
-bower install
+sudo bower --allow-root install
 [ $? -eq 0 ] || exit $?
 
 echo Cleaning...
