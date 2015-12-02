@@ -6,24 +6,27 @@ sudo service docker start
 
 echo NPM Install
 npm install
-[ $? -eq 0 ] || exit $?
+rc=$?; if [[ $rc != 0 ]]; then echo "NPM install failed"; exit $rc; fi
 
 echo Bower Install
-bower install
-[ $? -eq 0 ] || exit $?
+bower install || sudo bower --allow-root install
+rc=$?; if [[ $rc != 0 ]]; then echo "Bower install failed"; exit $rc; fi
 
 echo Cleaning...
 rm -rf ./dist
 
 echo Building app
 grunt
-[ $? -eq 0 ] || exit $?
+rc=$?; if [[ $rc != 0 ]]; then echo "Grunt build failed"; exit $rc; fi
 
 cp ./Dockerfile ./dist/
 
 cd dist
 npm install --production
-[ $? -eq 0 ] || exit $?
+rc=$?; if [[ $rc != 0 ]]; then echo "NPM-production install failed"; exit $rc; fi
 
 echo Building docker image
-docker build -t hardag/tictactoe . && echo "Done"
+docker build -t hardag/tictactoe . 
+rc=$?; if [[ $rc != 0 ]]; then echo "Docker build failed"; exit $rc; fi
+
+echo "Done"
