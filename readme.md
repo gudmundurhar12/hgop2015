@@ -1,10 +1,10 @@
 HGOP Project Template (TicTacToe) 
 =========
 # Test and Build status
-http://178.62.75.111/job/tictactoe%20-%20test%20and%20build/badge/icon
+[![Build Status](http://178.62.75.111/job/tictactoe%20-%20test%20and%20build/badge/icon)](http://178.62.75.111/job/tictactoe%20-%20test%20and%20build/)
 
 # Deployment status
-http://178.62.75.111/job/deploy/badge/icon
+[![Build Status](http://178.62.75.111/job/deploy/badge/icon)](http://178.62.75.111/job/deploy/)
 
 ### Project backlog
 
