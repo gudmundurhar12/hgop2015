@@ -5,11 +5,11 @@ sudo service docker start
 [ $? -eq 0 ] || exit $?
 
 echo NPM Install
-sudo npm install
+npm install
 [ $? -eq 0 ] || exit $?
 
 echo Bower Install
-sudo bower --allow-root install
+bower install
 [ $? -eq 0 ] || exit $?
 
 echo Cleaning...
@@ -23,6 +23,7 @@ cp ./Dockerfile ./dist/
 
 cd dist
 npm install --production
+[ $? -eq 0 ] || exit $?
 
 echo Building docker image
 docker build -t hardag/tictactoe . && echo "Done"
