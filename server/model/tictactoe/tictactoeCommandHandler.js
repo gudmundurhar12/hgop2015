@@ -12,17 +12,25 @@ module.exports = function tictactoeCommandHandler(events) {
         }];
       }
     },
-    "JoinGame" : function (cmd) {
+     "JoinGame": function (cmd) {
       {
+        if (gameCreatedEvent === undefined) {
+          return [{
+            id: cmd.id,
+            event: "GameDoesNotExist",
+            userName: cmd.userName,
+            timeStamp: cmd.timeStamp
+          }];
+        }
         return [{
           id: cmd.id,
-          event:"GameJoined",
+          event: "GameJoined",
           userName: cmd.userName,
-          otherUserName : gameCreatedEvent.userName,
+          otherUserName: gameCreatedEvent.userName,
           timeStamp: cmd.timeStamp
         }];
       }
-    },
+    }
   };
 
   return {
