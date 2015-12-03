@@ -98,14 +98,10 @@ module.exports = function tictactoeCommandHandler(events) {
       }
 
       var gameBoard = gameState.gameBoard;
-      if(gameBoard[cmd.x][cmd.y] === ''){
-        gameBoard[cmd.x][cmd.y] = cmd.side;
 
-        for(var i = 0 ; i < gameBoard.length ; i++){
-          if(gameBoard[0][i] === cmd.side && gameBoard[1][i] === cmd.side && gameBoard[2][i] === cmd.side ){
-            return [{
+      var gameWin = [{
               id: cmd.id,
-              event: cmd.userName + " Winns",
+              event: cmd.userName + " Wins",
               userName: cmd.userName,
               name: gameState.gameCreatedEvent.name,
               x : cmd.x,
@@ -113,7 +109,26 @@ module.exports = function tictactoeCommandHandler(events) {
               side: cmd.side,
               timeStamp: cmd.timeStamp
             }];
+
+
+      if(gameBoard[cmd.x][cmd.y] === ''){
+        gameBoard[cmd.x][cmd.y] = cmd.side;
+
+        for(var i = 0 ; i < gameBoard.length ; i++){
+          if(gameBoard[0][i] === cmd.side && gameBoard[1][i] === cmd.side && gameBoard[2][i] === cmd.side ){
+            return gameWin;
           }
+          if(gameBoard[i][0] === cmd.side && gameBoard[i][1] === cmd.side && gameBoard[i][2] === cmd.side ){
+            return gameWin;
+          }
+        }
+
+        if(gameBoard[0][0] === cmd.side && gameBoard[1][1] === cmd.side && gameBoard[2][2] === cmd.side){
+          return gameWin;
+        }
+
+        if(gameBoard[0][2] === cmd.side && gameBoard[1][1] === cmd.side && gameBoard[2][0] === cmd.side){
+          return gameWin;
         }
         return [{
           id: cmd.id,
