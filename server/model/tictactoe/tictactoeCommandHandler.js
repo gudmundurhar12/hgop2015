@@ -1,8 +1,10 @@
 module.exports = function tictactoeCommandHandler(events) {
+  
   var gameState = {
     gameCreatedEvent : events[0],
-    GameJoinedEvent  : events[1]
-  
+    gameJoinedEvent  : events[1],
+    gameLastMove : events[events.length - 1],
+    gameBoard : [['','',''],['','',''],['','','']],
   };
   
   var handlers = {
@@ -36,7 +38,7 @@ module.exports = function tictactoeCommandHandler(events) {
           timeStamp: cmd.timeStamp
         }];
       }
-      else if(gameState.GameJoinedEvent !== undefined){
+      else if(gameState.gameJoinedEvent !== undefined){
         return [{
           id: cmd.id,
           event: "GameFull",
@@ -55,6 +57,22 @@ module.exports = function tictactoeCommandHandler(events) {
     },
     
     "MakeMove" : function (cmd){
+     
+      var lastMove = gameState.gameLastMove
+
+     if(lastMove.userName !== undefined && lastMove.event !== "GameJoined"){
+        if(gameState.gameLastMove.userName === cmd.userName){
+          return [{
+            id: cmd.id,
+            event:"NotPlayersTurn",
+            userName: cmd.userName,
+            name: gameState.gameCreatedEvent.name,
+            side: cmd.side,
+            timeStamp: cmd.timeStamp
+          }];
+        }
+      }
+
       return [{
         id: cmd.id,
         event: "MoveMade",
