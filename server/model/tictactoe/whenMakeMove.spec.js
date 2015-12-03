@@ -349,7 +349,7 @@ it('Player should win on Diagonal \\ ',function(){
     JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
   });
 
-it('Player should win on Diagonal \/ ',function(){
+  it('Player should win on Diagonal \/ ',function(){
     given.push({
       id:"011",
       event:"MoveMade",
@@ -414,4 +414,112 @@ it('Player should win on Diagonal \/ ',function(){
 
     JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
   });
+
+ it('Game should be Draw ',function(){
+    given.push({
+      id:"011",
+      event:"MoveMade",
+      userName:"Jonni",
+      name:"FirstGame",
+      x:0,
+      y:0,
+      side:'X',
+      timeStamp: "2015.12.03T15:00:00"
+    },
+    {
+      id:"012",
+      event:"MoveMade",
+      userName:"Gummi",
+      name:"FirstGame",
+      x:0,
+      y:2,
+      side:'O',
+      timeStamp: "2015.12.03T15:01:00"
+    },
+    {
+      id:"013",
+      event:"MoveMade",
+      userName:"Jonni",
+      name:"FirstGame",
+      x:0,
+      y:1,
+      side:'X',
+      timeStamp: "2015.12.03T15:02:00"
+    },
+    {
+      id:"014",
+      event:"MoveMade",
+      userName:"Gummi",
+      name:"FirstGame",
+      x:1,
+      y:0,
+      side:'O',
+      timeStamp: "2015.12.03T15:03:00"
+    },
+    {
+      id:"015",
+      event:"MoveMade",
+      userName:"Jonni",
+      name:"FirstGame",
+      x:1,
+      y:2,
+      side:'X',
+      timeStamp: "2015.12.03T15:02:00"
+    },
+    {
+      id:"016",
+      event:"MoveMade",
+      userName:"Gummi",
+      name:"FirstGame",
+      x:1,
+      y:1,
+      side:'O',
+      timeStamp: "2015.12.03T15:03:00"
+    },
+    {
+      id:"017",
+      event:"MoveMade",
+      userName:"Jonni",
+      name:"FirstGame",
+      x:2,
+      y:0,
+      side:'X',
+      timeStamp: "2015.12.03T15:02:00"
+    },
+    {
+      id:"018",
+      event:"MoveMade",
+      userName:"Gummi",
+      name:"FirstGame",
+      x:2,
+      y:1,
+      side:'O',
+      timeStamp: "2015.12.03T15:03:00"
+    });
+    when={
+      id:"019",
+      command:"MakeMove",
+      userName : "Jonni",
+      x:2,
+      y:2,
+      side:'X',
+      timeStamp: "2015.12.03T15:04:00"
+    };
+    then=[{
+      id:"019",
+      event:"Draw",
+      userName:"Jonni",
+      name:"FirstGame",
+      x:2,
+      y:2,
+      side:'X',
+      timeStamp: "2015.12.03T15:04:00"
+    }];
+
+    var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
+
+    JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+  });
+
+
 });
