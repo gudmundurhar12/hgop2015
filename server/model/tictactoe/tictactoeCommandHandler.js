@@ -5,10 +5,10 @@ module.exports = function tictactoeCommandHandler(events) {
     "CreateGame": function (cmd) {
       {
         return [{
-          id:"0",
+          id: cmd.id,
           event:"GameCreated",
-          userName: "Gummi",
-          timeStamp: "2015.12.03T11:30:00"
+          userName: cmd.userName,
+          timeStamp: cmd.timeStamp
         }];
       }
     },
