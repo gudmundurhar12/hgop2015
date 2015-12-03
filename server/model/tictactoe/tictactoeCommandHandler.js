@@ -16,7 +16,7 @@ module.exports = function tictactoeCommandHandler(events) {
 
   _.each(events, function(gameEvent){
     var eventHandler = gameEvents[gameEvent.event];
-    eventHandler && eventHandler(gameEvent);
+     eventHandler = eventHandler && eventHandler(gameEvent);
   }); 
 
 
