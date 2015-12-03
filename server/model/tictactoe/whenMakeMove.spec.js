@@ -117,5 +117,40 @@ describe('MakeMove command', function(){
     JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
   });
 
+  it('should not allow to put into same cell',function(){
+    given.push({
+      id:"011",
+      event:"MoveMade",
+      userName:"Jonni",
+      name:"FirstGame",
+      x:0,
+      y:0,
+      side:'X',
+      timeStamp: "2015.12.03T12:00:00"
+    });
+    when={
+      id:"0112",
+      command:"MakeMove",
+      userName : "Gummi",
+      x:0,
+      y:0,
+      side:'O',
+      timeStamp: "2015.12.03T12:01:00"
+    };
+    then=[{
+      id:"0112",
+      event:"IllegalMove",
+      userName:"Gummi",
+      name:"FirstGame",
+      side:'O',
+      timeStamp: "2015.12.03T12:01:00"
+    }];
+
+    var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
+
+    JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+  });
+
+
 
 });

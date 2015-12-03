@@ -1,3 +1,4 @@
+var _ = require('lodash');
 module.exports = function tictactoeCommandHandler(events) {
   
   var gameState = {
@@ -7,6 +8,18 @@ module.exports = function tictactoeCommandHandler(events) {
     gameBoard : [['','',''],['','',''],['','','']],
   };
   
+  var gameEvents={
+    'MoveMade': function(gameEvent){
+      gameState.gameBoard[gameEvent.x][gameEvent.y] = gameEvent.side;
+    }
+  };
+
+  _.each(events, function(gameEvent){
+    var eventHandler = gameEvents[gameEvent.event];
+    eventHandler && eventHandler(gameEvent);
+  });
+
+
   var handlers = {
     "CreateGame": function (cmd) {
       if(gameState.gameCreatedEvent === undefined){
@@ -60,8 +73,8 @@ module.exports = function tictactoeCommandHandler(events) {
      
       var lastMove = gameState.gameLastMove
 
-     if(lastMove.userName !== undefined && lastMove.event !== "GameJoined"){
-        if(gameState.gameLastMove.userName === cmd.userName){
+     if(lastMove.userName !== undefined){
+        if(gameState.gameLastMove.userName === cmd.userName && lastMove.event === "MoveMade"){
           return [{
             id: cmd.id,
             event:"NotPlayersTurn",
@@ -71,6 +84,17 @@ module.exports = function tictactoeCommandHandler(events) {
             timeStamp: cmd.timeStamp
           }];
         }
+      }
+
+      if(gameState.gameBoard[cmd.x][cmd.y] !== ''){
+        return [{
+            id: cmd.id,
+            event:"IllegalMove",
+            userName: cmd.userName,
+            name: gameState.gameCreatedEvent.name,
+            side: cmd.side,
+            timeStamp: cmd.timeStamp
+          }];
       }
 
       return [{
