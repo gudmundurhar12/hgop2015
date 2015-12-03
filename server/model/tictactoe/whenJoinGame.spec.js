@@ -52,4 +52,37 @@ describe('join game command', function(){
 		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
 	});
 
+  it('should reject trying to join a full game',function(){
+    given=[{
+      id:"0",
+      event:"GameCreated",
+      userName: "Gummi",
+      timeStamp: "2015.12.03T11:30:00"
+    },
+    {
+      id:"01",
+      event:"GameJoined",
+      userName : "Jonni",
+      otherUserName: "Gummi",
+      timeStamp: "2015.12.03T11:40:00"
+    }];
+    when={
+      id:"03",
+      command:"JoinGame",
+      userName : "Pétur",
+      name:"FirstGame",
+      timeStamp: "2015.12.03T11:50:00"
+    };
+    then=[{
+      id:"03",
+      event:"GameFull",
+      userName : "Pétur",
+      timeStamp: "2015.12.03T11:50:00"
+    }];
+
+    var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
+
+    JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+  });
+
 });
