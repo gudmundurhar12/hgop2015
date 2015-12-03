@@ -45,6 +45,33 @@ describe('create game command', function(){
 		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
 	});
 
+  it('should not create game with same name',function(){
+    given= [{
+      id:"0",
+      command:"CreateGame",
+      userName : "Gummi",
+      name:"FirstGame",
+      timeStamp: "2015.12.03T11:30:00"
+    }];
+    when={
+      id:"1",
+      command:"CreateGame",
+      userName : "Rúnar",
+      name:"FirstGame",
+      timeStamp: "2015.12.03T11:50:00"
+    };
+    then=[{
+      id:"1",
+      event:"GameWithSameNameExists",
+      userName: "Rúnar",
+      timeStamp: "2015.12.03T11:50:00"
+    }];
+
+    var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
+
+    JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+  });
+
 	it('should create game',function(){
 		given= [];
 		when={
