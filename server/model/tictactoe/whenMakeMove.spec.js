@@ -151,6 +151,71 @@ describe('MakeMove command', function(){
     JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
   });
 
+  it('Player should winn on Vertical',function(){
+    given.push({
+      id:"011",
+      event:"MoveMade",
+      userName:"Jonni",
+      name:"FirstGame",
+      x:0,
+      y:0,
+      side:'X',
+      timeStamp: "2015.12.03T12:00:00"
+    },
+    {
+      id:"012",
+      event:"MoveMade",
+      userName:"Gummi",
+      name:"FirstGame",
+      x:0,
+      y:1,
+      side:'O',
+      timeStamp: "2015.12.03T12:01:00"
+    },
+    {
+      id:"013",
+      event:"MoveMade",
+      userName:"Jonni",
+      name:"FirstGame",
+      x:2,
+      y:0,
+      side:'X',
+      timeStamp: "2015.12.03T12:02:00"
+    },
+    {
+      id:"014",
+      event:"MoveMade",
+      userName:"Gummi",
+      name:"FirstGame",
+      x:0,
+      y:2,
+      side:'O',
+      timeStamp: "2015.12.03T12:03:00"
+    });
+    when={
+      id:"015",
+      command:"MakeMove",
+      userName : "Jonni",
+      x:1,
+      y:0,
+      side:'X',
+      timeStamp: "2015.12.03T12:04:00"
+    };
+    then=[{
+      id:"015",
+      event:"Jonni Winns",
+      userName:"Jonni",
+      name:"FirstGame",
+      x:1,
+      y:0,
+      side:'X',
+      timeStamp: "2015.12.03T12:04:00"
+    }];
+
+    var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
+
+    JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+  });
 
 
 });
