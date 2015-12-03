@@ -1,6 +1,6 @@
 var tictactoeCommandHandler = require('./tictactoeCommandHandler');
 
-describe('join game command', function(){
+describe('JoinGame command', function(){
 
 	var given, when, then;
 
@@ -37,7 +37,6 @@ describe('join game command', function(){
 			id:"02",
 			command:"JoinGame",
 			userName : "Gummi",
-			name:"FirstGame",
 			timeStamp: "2015.12.03T11:45:00"
 		};
 		then=[{
@@ -57,6 +56,7 @@ describe('join game command', function(){
       id:"0",
       event:"GameCreated",
       userName: "Gummi",
+      name:"FirstGame",
       timeStamp: "2015.12.03T11:30:00"
     },
     {
