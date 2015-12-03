@@ -8,6 +8,12 @@ Player creates a game
 + When  [ CreateGame(gameName, Player1) ]
 + Then  [ GameCreated(gameName, Player1) ]
 
+Player tries to create a game with same name as another game
+
++ Given [ GameCreated(gameName, Player1) ]
++ When  [ CreateGame(gameName, Player2) ]
++ Then  [ GameWithSameNameExists(gameName, player2) ]
+
 Player joins an existing game
 
 + Given [ GameCreated(gameName, Player1) ]
