@@ -203,7 +203,7 @@ describe('MakeMove command', function(){
     };
     then=[{
       id:"015",
-      event:"Jonni Wins",
+      event:"Game Won",
       userName:"Jonni",
       name:"FirstGame",
       x:1,
@@ -269,7 +269,7 @@ describe('MakeMove command', function(){
     };
     then=[{
       id:"015",
-      event:"Jonni Wins",
+      event:"Game Won",
       userName:"Jonni",
       name:"FirstGame",
       x:0,
@@ -335,7 +335,7 @@ it('Player should win on Diagonal \\ ',function(){
     };
     then=[{
       id:"015",
-      event:"Jonni Wins",
+      event:"Game Won",
       userName:"Jonni",
       name:"FirstGame",
       x:2,
@@ -401,7 +401,7 @@ it('Player should win on Diagonal \\ ',function(){
     };
     then=[{
       id:"015",
-      event:"Jonni Wins",
+      event:"Game Won",
       userName:"Jonni",
       name:"FirstGame",
       x:2,
@@ -507,7 +507,7 @@ it('Player should win on Diagonal \\ ',function(){
     };
     then=[{
       id:"019",
-      event:"Draw",
+      event:"Game Draw",
       userName:"Jonni",
       name:"FirstGame",
       x:2,

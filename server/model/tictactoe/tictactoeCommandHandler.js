@@ -103,7 +103,7 @@ module.exports = function tictactoeCommandHandler(events) {
 
       var gameWin = [{
               id: cmd.id,
-              event: cmd.userName + " Wins",
+              event: "Game Won",
               userName: cmd.userName,
               name: gameState.gameCreatedEvent.name,
               x : cmd.x,
@@ -155,7 +155,7 @@ module.exports = function tictactoeCommandHandler(events) {
         else{
           return [{
             id: cmd.id,
-            event: "Draw",
+            event: "Game Draw",
             userName: cmd.userName,
             name: gameState.gameCreatedEvent.name,
             x : cmd.x,
