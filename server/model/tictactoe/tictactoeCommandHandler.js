@@ -32,9 +32,11 @@ module.exports = function tictactoeCommandHandler(events) {
           timeStamp: cmd.timeStamp
         }];
       }
-      else if(gameState.gameCreatedEvent.name === cmd.name){
+
+      else if(gameState.gameCreatedEvent.gameId === cmd.gameId){
         return [{
           id: cmd.id,
+          gameId : cmd.gameId,
           event:"GameWithSameNameExists",
           userName: cmd.userName,
           timeStamp: cmd.timeStamp

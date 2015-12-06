@@ -7,6 +7,7 @@ describe('CreateGame command', function(){
 		given= [];
 		when={
 			id:"0",
+			gameId : "1",
 			command:"CreateGame",
 			userName : "Gummi",
 			name:"FirstGame",
@@ -14,6 +15,7 @@ describe('CreateGame command', function(){
 		};
 		then=[{
 			id:"0",
+			gameId : "1",
 			event:"GameCreated",
 			userName: "Gummi",
       name: "FirstGame",
@@ -29,6 +31,7 @@ describe('CreateGame command', function(){
 		given= [];
 		when={
 			id:"1",
+			gameId : "2",
 			command:"CreateGame",
 			userName : "Jonni",
 			name:"FirstGame",
@@ -36,6 +39,7 @@ describe('CreateGame command', function(){
 		};
 		then=[{
 			id:"1",
+			gameId : "2",
 			event:"GameCreated",
 			userName: "Jonni",
       name:"FirstGame",
