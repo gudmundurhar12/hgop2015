@@ -16,7 +16,7 @@ module.exports = function tictactoeCommandHandler(events) {
 
   _.each(events, function(gameEvent){
     var eventHandler = gameEvents[gameEvent.event];
-     eventHandler = eventHandler && eventHandler(gameEvent);
+    if(eventHandler) eventHandler(gameEvent);
   }); 
 
 
@@ -25,6 +25,7 @@ module.exports = function tictactoeCommandHandler(events) {
       if(gameState.gameCreatedEvent === undefined){
         return [{
           id: cmd.id,
+          gameId: cmd.gameId,
           event:"GameCreated",
           userName: cmd.userName,
           name: cmd.name,
@@ -170,8 +171,12 @@ module.exports = function tictactoeCommandHandler(events) {
   };
 
   return {
-    executeCommand: function (cmd) {
-      return handlers[cmd.command](cmd);
+executeCommand: function (cmd) {
+      var handler = handlers[cmd.command];
+      if(!handler){
+        throw new Error("No handler resolved for command " + JSON.stringify(cmd));
+      }
+      return handler(cmd);
     }
   };
 };
