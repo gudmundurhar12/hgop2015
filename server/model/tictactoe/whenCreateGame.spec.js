@@ -51,9 +51,12 @@ describe('CreateGame command', function(){
 		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
 	});
 
-  it('should not create game with same name',function(){
+  it('should not create game with same id',function(){
+    var id = "1";
+
     given= [{
       id:"0",
+      gameId : id,
       event:"GameCreated",
       userName: "Gummi",
       name: "FirstGame",
@@ -61,6 +64,7 @@ describe('CreateGame command', function(){
     }];
     when={
       id:"1",
+      gameId : id,
       command:"CreateGame",
       userName : "Rúnar",
       name:"FirstGame",
@@ -68,7 +72,8 @@ describe('CreateGame command', function(){
     };
     then=[{
       id:"1",
-      event:"GameWithSameNameExists",
+      gameId : id,
+      event:"GameWithIdExists",
       userName: "Rúnar",
       timeStamp: "2015.12.03T11:50:00"
     }];
