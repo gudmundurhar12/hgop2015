@@ -16,7 +16,7 @@ describe('TEST ENV GET /api/gameHistory', function () {
     var command =     {
       id : "1",
       gameId : "999",
-      comm: "CreateGame",
+      command: "CreateGame",
       userName: "Gummi",
       name: "FirstGame",
       timeStamp: "2015-12-07T11:29:29"
@@ -52,10 +52,10 @@ describe('TEST ENV GET /api/gameHistory', function () {
 
 
    it('Should execute fluid API test', function (done) {
-     /*
-     given(user("YourUser").createsGame("TheFirstGame"))
+     
+     given(user("Gummi").createsGame("TheFirstGame"))
      .expect("GameCreated").withName("TheFirstGame").isOk(done);
-      */
+      
      done();
    });
 
