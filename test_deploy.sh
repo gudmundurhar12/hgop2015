@@ -9,5 +9,6 @@ ssh root@$1 "sudo pkill -9 docker; docker rm -f $(docker ps -a -q); docker rmi -
 
 echo ---- run Acceptance Test on $1 ----
 export ACCEPTANCE_URL=http://$1
+sleep 2
 grunt mochaTest:acceptance
 rc=$?; if [[ $rc != 0 ]]; then echo "Acceptance test failed"; exit $rc; fi
