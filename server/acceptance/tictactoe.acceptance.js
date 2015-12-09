@@ -112,7 +112,6 @@ function given(cmd){
               return done(err);
             }
             res.body.should.be.instanceof(Array);
-            console.log(res.body);
             should(res.body[res.body.length - 1]).match(expectations[expectations.length - 1]);
             done();
           });
@@ -187,32 +186,5 @@ describe('TEST ENV GET /api/gameHistory', function () {
     .and(user("Gummi").placesMove("12", 2, 2, "X"))
     .expect("Game Draw").byUser("Gummi").markOnCell(2, 2, "X").isOk(done);
   });
-
-
-
-});
-
-describe('TEST response from post', function () {
-/* 
-  it('Should execute fluid API test', function (done) {
-    
-    given(user("Gummi").createsGame("999").named("TheFirstGame"))
-    .expect("GameCreated").withName("TheFirstGame").isOk(done);
-  });
-
-  it('Should allow another player to join a game', function (done) {
-     given(user("Gummi").createsGame("1").named("FirstGame"))
-     .and(user("Jonni").joinsGame("1").named("FirstGame"))
-     .expect("GameJoined").byUser("Jonni").isOk(done);
-  });
-
-  it('Should allow player to make a move', function (done) {
-    given(user("Gummi").createsGame("11").named("SecondGame"))
-    .and(user("Jonni").joinsGame("11").named("SecondGame"))
-    .and(user("Gummi").placesMove("11", 0, 0, "X"))
-    .expect("MoveMade").byUser("Gummi").markOnCell(0, 0, "X").isOk(done);
-  });
-*/
-
 
 });
