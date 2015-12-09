@@ -41,7 +41,7 @@ function given(cmd){
       return givenApi;
     },
     isOk: function(done){
-      const req = request(acceptanceUrl);
+      var req = request(acceptanceUrl);
       req
       .post('/api/createGame')
       .type('json')
