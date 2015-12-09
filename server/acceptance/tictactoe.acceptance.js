@@ -91,7 +91,7 @@ function given(cmd){
       return givenApi;
     },
     isOk: function(done){
-      async.each(commands, function (item, callback){
+      async.eachSeries(commands, function (item, callback){
         var req = request(acceptanceUrl);
         req.post(commandUri(item.command))
         .type('json')
@@ -101,9 +101,8 @@ function given(cmd){
             return done(err);
           }
           callback();
-
         });
-      }, function(err){
+      }, function(callback, err){
           request(acceptanceUrl)
           .get('/api/gameHistory/' + commands[0].gameId)
           .expect(200)
@@ -113,6 +112,7 @@ function given(cmd){
               return done(err);
             }
             res.body.should.be.instanceof(Array);
+            console.log(res.body);
             should(res.body[res.body.length - 1]).match(expectations[expectations.length - 1]);
             done();
           });
