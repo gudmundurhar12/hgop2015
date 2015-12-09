@@ -7,6 +7,7 @@ describe('MakeMove command', function(){
   beforeEach(function(){
     given= [{
       id:"0",
+      gameId: "1",
       event:"GameCreated",
       userName: "Gummi",
       name:"FirstGame",
@@ -14,6 +15,7 @@ describe('MakeMove command', function(){
     },
     {
       id:"01",
+      gameId: "1",
       event:"GameJoined",
       userName : "Jonni",
       otherUserName: "Gummi",
@@ -24,6 +26,7 @@ describe('MakeMove command', function(){
   it('should make first move',function(){
     when={
       id:"011",
+      gameId: "1",
       command:"MakeMove",
       userName : "Jonni",
       x:0,
@@ -33,6 +36,7 @@ describe('MakeMove command', function(){
     };
     then=[{
       id:"011",
+      gameId: "1",
       event:"MoveMade",
       userName:"Jonni",
       name:"FirstGame",
@@ -50,6 +54,7 @@ describe('MakeMove command', function(){
   it('should not make move with same player',function(){
     given.push({
       id:"011",
+      gameId: "1",
       event:"MoveMade",
       userName:"Jonni",
       name:"FirstGame",
@@ -60,6 +65,7 @@ describe('MakeMove command', function(){
     });
     when={
       id:"0110",
+      gameId: "1",
       command:"MakeMove",
       userName : "Jonni",
       x:0,
@@ -69,6 +75,7 @@ describe('MakeMove command', function(){
     };
     then=[{
       id:"0110",
+      gameId: "1",
       event:"NotPlayersTurn",
       userName:"Jonni",
       name:"FirstGame",
@@ -84,6 +91,7 @@ describe('MakeMove command', function(){
   it('should make second move',function(){
     given.push({
       id:"011",
+      gameId: "1",
       event:"MoveMade",
       userName:"Jonni",
       name:"FirstGame",
@@ -94,6 +102,7 @@ describe('MakeMove command', function(){
     });
     when={
       id:"0111",
+      gameId: "1",
       command:"MakeMove",
       userName : "Gummi",
       x:0,
@@ -103,6 +112,7 @@ describe('MakeMove command', function(){
     };
     then=[{
       id:"0111",
+      gameId: "1",
       event:"MoveMade",
       userName:"Gummi",
       name:"FirstGame",
@@ -120,6 +130,7 @@ describe('MakeMove command', function(){
   it('should not allow to put into same cell',function(){
     given.push({
       id:"011",
+      gameId: "1",
       event:"MoveMade",
       userName:"Jonni",
       name:"FirstGame",
@@ -130,6 +141,7 @@ describe('MakeMove command', function(){
     });
     when={
       id:"0112",
+      gameId: "1",
       command:"MakeMove",
       userName : "Gummi",
       x:0,
@@ -139,6 +151,7 @@ describe('MakeMove command', function(){
     };
     then=[{
       id:"0112",
+      gameId: "1",
       event:"IllegalMove",
       userName:"Gummi",
       name:"FirstGame",
@@ -156,6 +169,7 @@ describe('MakeMove command', function(){
 it('Player should win on Diagonal \\ ',function(){
     given.push({
       id:"011",
+      gameId: "1",
       event:"MoveMade",
       userName:"Jonni",
       name:"FirstGame",
@@ -166,6 +180,7 @@ it('Player should win on Diagonal \\ ',function(){
     },
     {
       id:"012",
+      gameId: "1",
       event:"MoveMade",
       userName:"Gummi",
       name:"FirstGame",
@@ -176,6 +191,7 @@ it('Player should win on Diagonal \\ ',function(){
     },
     {
       id:"013",
+      gameId: "1",
       event:"MoveMade",
       userName:"Jonni",
       name:"FirstGame",
@@ -186,6 +202,7 @@ it('Player should win on Diagonal \\ ',function(){
     },
     {
       id:"014",
+      gameId: "1",
       event:"MoveMade",
       userName:"Gummi",
       name:"FirstGame",
@@ -196,6 +213,7 @@ it('Player should win on Diagonal \\ ',function(){
     });
     when={
       id:"015",
+      gameId: "1",
       command:"MakeMove",
       userName : "Jonni",
       x:2,
@@ -205,6 +223,7 @@ it('Player should win on Diagonal \\ ',function(){
     };
     then=[{
       id:"015",
+      gameId: "1",
       event:"Game Won",
       userName:"Jonni",
       name:"FirstGame",
@@ -222,6 +241,7 @@ it('Player should win on Diagonal \\ ',function(){
   it('Player should win on Diagonal \/ ',function(){
     given.push({
       id:"011",
+      gameId: "1",
       event:"MoveMade",
       userName:"Jonni",
       name:"FirstGame",
@@ -232,6 +252,7 @@ it('Player should win on Diagonal \\ ',function(){
     },
     {
       id:"012",
+      gameId: "1",
       event:"MoveMade",
       userName:"Gummi",
       name:"FirstGame",
@@ -242,6 +263,7 @@ it('Player should win on Diagonal \\ ',function(){
     },
     {
       id:"013",
+      gameId: "1",
       event:"MoveMade",
       userName:"Jonni",
       name:"FirstGame",
@@ -252,6 +274,7 @@ it('Player should win on Diagonal \\ ',function(){
     },
     {
       id:"014",
+      gameId: "1",
       event:"MoveMade",
       userName:"Gummi",
       name:"FirstGame",
@@ -262,6 +285,7 @@ it('Player should win on Diagonal \\ ',function(){
     });
     when={
       id:"015",
+      gameId: "1",
       command:"MakeMove",
       userName : "Jonni",
       x:2,
@@ -271,6 +295,7 @@ it('Player should win on Diagonal \\ ',function(){
     };
     then=[{
       id:"015",
+      gameId: "1",
       event:"Game Won",
       userName:"Jonni",
       name:"FirstGame",
@@ -288,6 +313,7 @@ it('Player should win on Diagonal \\ ',function(){
  it('Game should be Draw ',function(){
     given.push({
       id:"011",
+      gameId: "1",
       event:"MoveMade",
       userName:"Jonni",
       name:"FirstGame",
@@ -298,6 +324,7 @@ it('Player should win on Diagonal \\ ',function(){
     },
     {
       id:"012",
+      gameId: "1",
       event:"MoveMade",
       userName:"Gummi",
       name:"FirstGame",
@@ -308,6 +335,7 @@ it('Player should win on Diagonal \\ ',function(){
     },
     {
       id:"013",
+      gameId: "1",
       event:"MoveMade",
       userName:"Jonni",
       name:"FirstGame",
@@ -318,6 +346,7 @@ it('Player should win on Diagonal \\ ',function(){
     },
     {
       id:"014",
+      gameId: "1",
       event:"MoveMade",
       userName:"Gummi",
       name:"FirstGame",
@@ -328,6 +357,7 @@ it('Player should win on Diagonal \\ ',function(){
     },
     {
       id:"015",
+      gameId: "1",
       event:"MoveMade",
       userName:"Jonni",
       name:"FirstGame",
@@ -338,6 +368,7 @@ it('Player should win on Diagonal \\ ',function(){
     },
     {
       id:"016",
+      gameId: "1",
       event:"MoveMade",
       userName:"Gummi",
       name:"FirstGame",
@@ -348,6 +379,7 @@ it('Player should win on Diagonal \\ ',function(){
     },
     {
       id:"017",
+      gameId: "1",
       event:"MoveMade",
       userName:"Jonni",
       name:"FirstGame",
@@ -358,6 +390,7 @@ it('Player should win on Diagonal \\ ',function(){
     },
     {
       id:"018",
+      gameId: "1",
       event:"MoveMade",
       userName:"Gummi",
       name:"FirstGame",
@@ -368,6 +401,7 @@ it('Player should win on Diagonal \\ ',function(){
     });
     when={
       id:"019",
+      gameId: "1",
       command:"MakeMove",
       userName : "Jonni",
       x:2,
@@ -377,6 +411,7 @@ it('Player should win on Diagonal \\ ',function(){
     };
     then=[{
       id:"019",
+      gameId: "1",
       event:"Game Draw",
       userName:"Jonni",
       name:"FirstGame",
@@ -403,6 +438,7 @@ function _Fn(value){
     beforeEach(function(){
       given= [{
         id:"0",
+        gameId: "1",
         event:"GameCreated",
         userName: "Gummi",
         name:"FirstGame",
@@ -410,6 +446,7 @@ function _Fn(value){
       },
       {
         id:"01",
+        gameId: "1",
         event:"GameJoined",
         userName : "Jonni",
         otherUserName: "Gummi",
@@ -421,6 +458,7 @@ function _Fn(value){
     it('Player should win on Vertical on line ' + value,function(){
       given.push({
         id:"011",
+        gameId: "1",
         event:"MoveMade",
         userName:"Jonni",
         name:"FirstGame",
@@ -431,6 +469,7 @@ function _Fn(value){
       },
       {
         id:"012",
+        gameId: "1",
         event:"MoveMade",
         userName:"Gummi",
         name:"FirstGame",
@@ -441,6 +480,7 @@ function _Fn(value){
       },
       {
         id:"013",
+        gameId: "1",
         event:"MoveMade",
         userName:"Jonni",
         name:"FirstGame",
@@ -451,6 +491,7 @@ function _Fn(value){
       },
       {
         id:"014",
+        gameId: "1",
         event:"MoveMade",
         userName:"Gummi",
         name:"FirstGame",
@@ -461,6 +502,7 @@ function _Fn(value){
       });
       when={
         id:"015",
+        gameId: "1",
         command:"MakeMove",
         userName : "Jonni",
         x:1,
@@ -470,6 +512,7 @@ function _Fn(value){
       };
       then=[{
         id:"015",
+        gameId: "1",
         event:"Game Won",
         userName:"Jonni",
         name:"FirstGame",
@@ -487,6 +530,7 @@ function _Fn(value){
       it('Player should win on Horizontal line ' + value,function(){
       given.push({
         id:"011",
+        gameId: "1",
         event:"MoveMade",
         userName:"Jonni",
         name:"FirstGame",
@@ -497,6 +541,7 @@ function _Fn(value){
       },
       {
         id:"012",
+        gameId: "1",
         event:"MoveMade",
         userName:"Gummi",
         name:"FirstGame",
@@ -507,6 +552,7 @@ function _Fn(value){
       },
       {
         id:"013",
+        gameId: "1",
         event:"MoveMade",
         userName:"Jonni",
         name:"FirstGame",
@@ -517,6 +563,7 @@ function _Fn(value){
       },
       {
         id:"014",
+        gameId: "1",
         event:"MoveMade",
         userName:"Gummi",
         name:"FirstGame",
@@ -527,6 +574,7 @@ function _Fn(value){
       });
       when={
         id:"015",
+        gameId: "1",
         command:"MakeMove",
         userName : "Jonni",
         x:value,
@@ -536,6 +584,7 @@ function _Fn(value){
       };
       then=[{
         id:"015",
+        gameId: "1",
         event:"Game Won",
         userName:"Jonni",
         name:"FirstGame",

@@ -7,12 +7,14 @@ describe('JoinGame command', function(){
 	it('should join a created game',function(){
 		given=[{
 			id:"0",
+			gameId: "1",
 			event:"GameCreated",
 			userName: "Gummi",
 			timeStamp: "2015.12.03T11:30:00"
 		}];
 		when={
 			id:"01",
+			gameId: "1",
 			command:"JoinGame",
 			userName : "Jonni",
 			name:"FirstGame",
@@ -20,6 +22,7 @@ describe('JoinGame command', function(){
 		};
 		then=[{
 			id:"01",
+			gameId: "1",
 			event:"GameJoined",
 			userName : "Jonni",
 			otherUserName: "Gummi",
@@ -35,12 +38,14 @@ describe('JoinGame command', function(){
 		given=[];
 		when={
 			id:"02",
+			gameId: "1",
 			command:"JoinGame",
 			userName : "Gummi",
 			timeStamp: "2015.12.03T11:45:00"
 		};
 		then=[{
 			id:"02",
+			gameId: "1",
 			event:"GameDoesNotExist",
 			userName: "Gummi",
 			timeStamp: "2015.12.03T11:45:00"
@@ -54,6 +59,7 @@ describe('JoinGame command', function(){
   it('should reject trying to join a full game',function(){
     given=[{
       id:"0",
+      gameId: "1",
       event:"GameCreated",
       userName: "Gummi",
       name:"FirstGame",
@@ -61,6 +67,7 @@ describe('JoinGame command', function(){
     },
     {
       id:"01",
+      gameId: "1",
       event:"GameJoined",
       userName : "Jonni",
       otherUserName: "Gummi",
@@ -68,6 +75,7 @@ describe('JoinGame command', function(){
     }];
     when={
       id:"03",
+      gameId: "1",
       command:"JoinGame",
       userName : "Pétur",
       name:"FirstGame",
@@ -75,6 +83,7 @@ describe('JoinGame command', function(){
     };
     then=[{
       id:"03",
+      gameId: "1",
       event:"GameFull",
       userName : "Pétur",
       timeStamp: "2015.12.03T11:50:00"

@@ -9,8 +9,11 @@ function commandUri(command){
   if(command === "CreateGame"){
     return "/api/createGame";
   }
-  else if(command === "JoinGame"){
+  if(command === "JoinGame"){
     return "/api/joinGame";
+  }
+  if(command === "MakeMove"){
+    return "/api/placeMove";
   }
 }
 
@@ -30,11 +33,20 @@ function user(nameOfUser){
       
       return cmd;
     },
-    joinsGame: function(gameId){
+    joinsGame: function(id){
      
       cmd.command = "JoinGame";
-      cmd.gameId = gameId;
+      cmd.gameId = id;
      
+      return cmd;
+    },
+    placesMove: function(gameId, x, y, token){
+      cmd.gameId = gameId;
+      cmd.command = "MakeMove";
+      cmd.x = x;
+      cmd.y = y;
+      cmd.side = token; 
+
       return cmd;
     },
     id : "1",
@@ -70,6 +82,12 @@ function given(cmd){
     },
     byUser: function(userName) {
       expectations[expectations.length - 1].userName = userName;
+      return givenApi;
+    },
+    markOnCell: function(x,y,token){
+      expectations[expectations.length - 1].x = x;
+      expectations[expectations.length - 1].y = y;
+      expectations[expectations.length - 1].side = token;
       return givenApi;
     },
     isOk: function(done){
@@ -120,13 +138,17 @@ describe('TEST ENV GET /api/gameHistory', function () {
       .type('json')
       .send(command)
       .end(function (err, res) {
-        if (err) return done(err);
+        if (err) {
+          return done(err);
+        }
         request(acceptanceUrl)
           .get('/api/gameHistory/888')
           .expect(200)
           .expect('Content-Type', /json/)
           .end(function (err, res) {
-            if (err) return done(err);
+            if (err) {
+              return done(err);
+            }
             res.body.should.be.instanceof(Array);
             should(res.body).eql(
               [{
@@ -156,4 +178,12 @@ describe('TEST response from post', function () {
      .and(user("Jonni").joinsGame("1").named("FirstGame"))
      .expect("GameJoined").byUser("Jonni").isOk(done);
   });
+
+  it('Should allow another player to make a move', function (done) {
+    given(user("Gummi").createsGame("12").named("SecondGame"))
+    .and(user("Jonni").joinsGame("12").named("SecondGame"))
+    .and(user("Gummi").placesMove("12", 0, 0, "X"))
+    .expect("MoveMade").byUser("Gummi").markOnCell(0, 0, "X").isOk(done);
+  });
+
 });

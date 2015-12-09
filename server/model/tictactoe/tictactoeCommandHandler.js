@@ -49,6 +49,7 @@ module.exports = function tictactoeCommandHandler(events) {
       if (gameState.gameCreatedEvent === undefined) {
         return [{
           id: cmd.id,
+          gameId: cmd.gameId,
           event: "GameDoesNotExist",
           userName: cmd.userName,
           timeStamp: cmd.timeStamp
@@ -57,6 +58,7 @@ module.exports = function tictactoeCommandHandler(events) {
       else if(gameState.gameJoinedEvent !== undefined){
         return [{
           id: cmd.id,
+          gameId: cmd.gameId,
           event: "GameFull",
           userName: cmd.userName,
           timeStamp: cmd.timeStamp
@@ -64,6 +66,7 @@ module.exports = function tictactoeCommandHandler(events) {
       }
       return [{
         id: cmd.id,
+        gameId: cmd.gameId,
         event: "GameJoined",
         userName: cmd.userName,
         otherUserName: gameState.gameCreatedEvent.userName,
@@ -78,9 +81,10 @@ module.exports = function tictactoeCommandHandler(events) {
 
      // Make sure that the same player doesn't make two moves in a row
      if(lastMove.userName !== undefined){
-        if(gameState.gameLastMove.userName === cmd.userName && lastMove.event === "MoveMade"){
+        if(gameState.gameLastMove.userName === cmd.userName && lastMove.event !== "GameJoined"){
           return [{
             id: cmd.id,
+            gameId: cmd.gameId,
             event:"NotPlayersTurn",
             userName: cmd.userName,
             name: gameState.gameCreatedEvent.name,
@@ -94,6 +98,7 @@ module.exports = function tictactoeCommandHandler(events) {
       if(gameState.gameBoard[cmd.x][cmd.y] !== ''){
         return [{
             id: cmd.id,
+            gameId: cmd.gameId,
             event:"IllegalMove",
             userName: cmd.userName,
             name: gameState.gameCreatedEvent.name,
@@ -106,6 +111,7 @@ module.exports = function tictactoeCommandHandler(events) {
 
       var gameWin = [{
               id: cmd.id,
+              gameId: cmd.gameId,
               event: "Game Won",
               userName: cmd.userName,
               name: gameState.gameCreatedEvent.name,
@@ -146,6 +152,7 @@ module.exports = function tictactoeCommandHandler(events) {
         if(!draw){
           return [{
             id: cmd.id,
+            gameId: cmd.gameId,
             event: "MoveMade",
             userName: cmd.userName,
             name: gameState.gameCreatedEvent.name,
@@ -158,6 +165,7 @@ module.exports = function tictactoeCommandHandler(events) {
         else{
           return [{
             id: cmd.id,
+            gameId: cmd.gameId,
             event: "Game Draw",
             userName: cmd.userName,
             name: gameState.gameCreatedEvent.name,
