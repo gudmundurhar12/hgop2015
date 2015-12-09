@@ -3,55 +3,93 @@
 var should = require('should');
 var request = require('supertest');
 var acceptanceUrl = process.env.ACCEPTANCE_URL;
+var async = require('async');
 
-function user(name){
+function commandUri(command){
+  if(command === "CreateGame"){
+    return "/api/createGame";
+  }
+  else if(command === "JoinGame"){
+    return "/api/joinGame";
+  }
+}
+
+function user(nameOfUser){
 
   var cmd = {
-    id : "1",
-    gameId : "999",
-    command: undefined,
-    userName: name,
-    name: undefined,
-    timeStamp: "2015-12-07T11:29:29"
-  };
+    createsGame: function(id){
 
-  var apiCommand = {
-    createsGame: function(gameName){
       cmd.command = "CreateGame";
-      cmd.name = gameName;
+      cmd.gameId = id;
 
       return cmd;
-    }
+    },
+    named: function(gameName){
+  
+      cmd.name = gameName;
+      
+      return cmd;
+    },
+    joinsGame: function(gameId){
+     
+      cmd.command = "JoinGame";
+      cmd.gameId = gameId;
+     
+      return cmd;
+    },
+    id : "1",
+    userName : nameOfUser,
+    timeStamp: "2015-12-07T11:29:29"
+
   };
-  return apiCommand;
+  return cmd;
 }
 
 
 function given(cmd){
 
+  var commands = [cmd];
+  var responses = [];
   var expectations = [];
-  var expectation = {};
   var givenApi = {
     expect: function(eventType){
-      expectation.event = eventType;
+      expectations.push({event: eventType});
       return givenApi;
     },
     withName: function(gameName){
-      expectation.gameName = gameName;
+      expectations[expectations.length - 1].name = gameName;
+      return givenApi;
+    },
+    withGameId: function(gameId) {
+      expectations[expectations.length - 1].gameId = gameId;
+      return givenApi;
+    },
+    and: function(command) {
+      commands.push(command);
+      return givenApi;
+    },
+    byUser: function(userName) {
+      expectations[expectations.length - 1].userName = userName;
       return givenApi;
     },
     isOk: function(done){
-      var req = request(acceptanceUrl);
-      req
-      .post('/api/createGame')
-      .type('json')
-      .send(cmd)
-      .end( function(err, res){  
-        if (err) return done(err);
-          should(res.body[res.body.length - 1]).have.property('event', expectation.event);
-          should(res.body[res.body.length - 1]).have.property('name', expectation.gameName);
+      async.each(commands, function (item, callback){
+        var req = request(acceptanceUrl);
+        req.post(commandUri(item.command))
+        .type('json')
+        .send(item)
+        .end( function(err, res){  
+          if (err) {
+            return done(err);
+          }
+          responses.push(res.body[0]);
+          callback();
+
+        });
+      }, function(err){
+          should(responses[responses.length - 1]).match(expectations[expectations.length - 1]);
           done();
-      });
+      })
     }
   };
   return givenApi;
@@ -103,12 +141,19 @@ describe('TEST ENV GET /api/gameHistory', function () {
           });
       });
   });
+});
 
+describe('TEST response from post', function () {
 
-   it('Should execute fluid API test', function (done) {
+  it('Should execute fluid API test', function (done) {
      
-     given(user("Gummi").createsGame("TheFirstGame"))
-     .expect("GameCreated").withName("TheFirstGame").isOk(done);
-   });
+    given(user("Gummi").createsGame("999").named("TheFirstGame"))
+    .expect("GameCreated").withName("TheFirstGame").isOk(done);
+  });
 
+  it('Should allow another player to join a game', function (done) {
+     given(user("Gummi").createsGame("1").named("FirstGame"))
+     .and(user("Jonni").joinsGame("1").named("FirstGame"))
+     .expect("GameJoined").byUser("Jonni").isOk(done);
+  });
 });
