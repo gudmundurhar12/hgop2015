@@ -166,9 +166,9 @@ describe('TEST ENV GET /api/gameHistory', function () {
 });
 
 describe('TEST response from post', function () {
-
+/* 
   it('Should execute fluid API test', function (done) {
-     
+    
     given(user("Gummi").createsGame("999").named("TheFirstGame"))
     .expect("GameCreated").withName("TheFirstGame").isOk(done);
   });
@@ -185,7 +185,7 @@ describe('TEST response from post', function () {
     .and(user("Gummi").placesMove("11", 0, 0, "X"))
     .expect("MoveMade").byUser("Gummi").markOnCell(0, 0, "X").isOk(done);
   });
-
+*/
   it('Should result in Draw', function (done) {
     given(user("Gummi").createsGame("12").named("ThirdGame"))
     .and(user("Jonni").joinsGame("12").named("ThirdGame"))
