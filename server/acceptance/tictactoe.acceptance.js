@@ -105,8 +105,18 @@ function given(cmd){
 
         });
       }, function(err){
-          should(responses[responses.length - 1]).match(expectations[expectations.length - 1]);
-          done();
+          request(acceptanceUrl)
+          .get('/api/gameHistory/' + commands[0].gameId)
+          .expect(200)
+          .expect('Content-Type', /json/)
+          .end(function (err, res) {
+            if (err) {
+              return done(err);
+            }
+            res.body.should.be.instanceof(Array);
+            should(responses[responses.length - 1]).match(expectations[expectations.length - 1]);
+            done();
+          });
       })
     }
   };
@@ -163,6 +173,24 @@ describe('TEST ENV GET /api/gameHistory', function () {
           });
       });
   });
+
+  it('Should result in Draw', function (done) {
+    given(user("Gummi").createsGame("12").named("ThirdGame"))
+    .and(user("Jonni").joinsGame("12").named("ThirdGame"))
+    .and(user("Gummi").placesMove("12", 0, 0, "X"))
+    .and(user("Jonni").placesMove("12", 0, 2, "O"))
+    .and(user("Gummi").placesMove("12", 0, 1, "X"))
+    .and(user("Jonni").placesMove("12", 1, 0, "O"))
+    .and(user("Gummi").placesMove("12", 1, 2, "X"))
+    .and(user("Jonni").placesMove("12", 1, 1, "O"))
+    .and(user("Gummi").placesMove("12", 2, 0, "X"))
+    .and(user("Jonni").placesMove("12", 2, 1, "O"))
+    .and(user("Gummi").placesMove("12", 2, 2, "X"))
+    .expect("Game Draw").byUser("Gummi").markOnCell(2, 2, "X").isOk(done);
+  });
+
+
+
 });
 
 describe('TEST response from post', function () {
@@ -186,19 +214,6 @@ describe('TEST response from post', function () {
     .expect("MoveMade").byUser("Gummi").markOnCell(0, 0, "X").isOk(done);
   });
 */
-  it('Should result in Draw', function (done) {
-    given(user("Gummi").createsGame("12").named("ThirdGame"))
-    .and(user("Jonni").joinsGame("12").named("ThirdGame"))
-    .and(user("Gummi").placesMove("12", 0, 0, "X"))
-    .and(user("Jonni").placesMove("12", 0, 2, "O"))
-    .and(user("Gummi").placesMove("12", 0, 1, "X"))
-    .and(user("Jonni").placesMove("12", 1, 0, "O"))
-    .and(user("Gummi").placesMove("12", 1, 2, "X"))
-    .and(user("Jonni").placesMove("12", 1, 1, "O"))
-    .and(user("Gummi").placesMove("12", 2, 0, "X"))
-    .and(user("Jonni").placesMove("12", 2, 1, "O"))
-    .and(user("Gummi").placesMove("12", 2, 2, "X"))
-    .expect("Game Draw").byUser("Gummi").markOnCell(2, 2, "X").isOk(done);
-  });
+
 
 });
