@@ -46,7 +46,7 @@ function given(cmd){
       .post('/api/createGame')
       .type('json')
       .send(cmd)
-      .end((err, res) => {  
+      .end( function(err, res){  
         if (err) return done(err);
           should(res.body[res.body.length - 1]).have.property('event', expectation.event);
           should(res.body[res.body.length - 1]).have.property('name', expectation.gameName);
