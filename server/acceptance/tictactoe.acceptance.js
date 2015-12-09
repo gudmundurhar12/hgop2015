@@ -49,7 +49,7 @@ function user(nameOfUser){
 
       return cmd;
     },
-    id : "1",
+    id : "0",
     userName : nameOfUser,
     timeStamp: "2015-12-07T11:29:29"
 
