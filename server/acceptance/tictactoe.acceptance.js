@@ -179,11 +179,26 @@ describe('TEST response from post', function () {
      .expect("GameJoined").byUser("Jonni").isOk(done);
   });
 
-  it('Should allow another player to make a move', function (done) {
-    given(user("Gummi").createsGame("12").named("SecondGame"))
-    .and(user("Jonni").joinsGame("12").named("SecondGame"))
-    .and(user("Gummi").placesMove("12", 0, 0, "X"))
+  it('Should allow player to make a move', function (done) {
+    given(user("Gummi").createsGame("11").named("SecondGame"))
+    .and(user("Jonni").joinsGame("11").named("SecondGame"))
+    .and(user("Gummi").placesMove("11", 0, 0, "X"))
     .expect("MoveMade").byUser("Gummi").markOnCell(0, 0, "X").isOk(done);
+  });
+
+  it('Should result in Draw', function (done) {
+    given(user("Gummi").createsGame("12").named("ThirdGame"))
+    .and(user("Jonni").joinsGame("12").named("ThirdGame"))
+    .and(user("Gummi").placesMove("12", 0, 0, "X"))
+    .and(user("Jonni").placesMove("12", 0, 2, "O"))
+    .and(user("Gummi").placesMove("12", 0, 1, "X"))
+    .and(user("Jonni").placesMove("12", 1, 0, "O"))
+    .and(user("Gummi").placesMove("12", 1, 2, "X"))
+    .and(user("Jonni").placesMove("12", 1, 1, "O"))
+    .and(user("Gummi").placesMove("12", 2, 0, "X"))
+    .and(user("Jonni").placesMove("12", 2, 1, "O"))
+    .and(user("Gummi").placesMove("12", 2, 2, "X"))
+    .expect("Game Draw").byUser("Gummi").markOnCell(2, 2, "X").isOk(done);
   });
 
 });
