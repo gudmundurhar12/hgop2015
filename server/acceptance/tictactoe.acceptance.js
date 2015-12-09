@@ -100,7 +100,6 @@ function given(cmd){
           if (err) {
             return done(err);
           }
-          responses.push(res.body[0]);
           callback();
 
         });
@@ -114,7 +113,7 @@ function given(cmd){
               return done(err);
             }
             res.body.should.be.instanceof(Array);
-            should(responses[responses.length - 1]).match(expectations[expectations.length - 1]);
+            should(res.body[res.body.length - 1]).match(expectations[expectations.length - 1]);
             done();
           });
       })
