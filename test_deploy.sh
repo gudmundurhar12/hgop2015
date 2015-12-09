@@ -13,5 +13,5 @@ sleep 2
 grunt mochaTest:acceptance
 rc=$?; if [[ $rc != 0 ]]; then echo "Acceptance test failed"; exit $rc; fi
 
-echo ---- Deploy to Production Machine on $2----
-ssh root@$2 "sudo pkill -9 docker; docker rm -f $(docker ps -aq); docker rmi -f $(docker images -q); sudo service docker start && docker pull hardag/tictactoe && docker run -p 80:8080 -d -e "NODE_ENV=production" hardag/tictactoe && echo ---- Docker running on $2 ----"
+echo ---- Deploy to Production Machine on $3----
+ssh root@$3 "sudo pkill -9 docker; docker rm -f $(docker ps -aq); docker rmi -f $(docker images -q); sudo service docker start && docker pull hardag/tictactoe && docker run -p 80:8080 -d -e "NODE_ENV=production" hardag/tictactoe && echo ---- Docker running on $3 ----"
