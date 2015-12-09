@@ -6,7 +6,7 @@ var acceptanceUrl = process.env.ACCEPTANCE_URL;
 
 function user(name){
 
-  const cmd = {
+  var cmd = {
     id : "1",
     gameId : "999",
     command: undefined,
