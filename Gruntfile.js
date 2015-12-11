@@ -442,11 +442,8 @@ module.exports = function (grunt) {
     mochaTest: {
       test: {
         options: {
-          // reporter: process.env.MOCHA_REPORTER || 'spec',
-          // captureFile: 'server-tests'
-           reporter: 'xunit',
-            quiet: true,
-            captureFile: 'test_reports/test-reports.xml'
+          reporter: process.env.MOCHA_REPORTER || 'spec',
+          captureFile: 'server-tests'
         },
         src: ['server/**/*.spec.js']
       },
