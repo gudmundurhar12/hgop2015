@@ -1,5 +1,5 @@
-var user = require('../acceptance/tictactoe.acceptance').user;
-var given = require('../acceptance/tictactoe.acceptance').given;
+var user = require('../fluid-api/tictactoeFluidApi').user;
+var given = require('../fluid-api/tictactoeFluidApi').given;
 
 it('Should play 1000 games in x seconds.', function (done) {
   var doneCount = 0;
