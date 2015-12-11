@@ -16,6 +16,8 @@ echo Cleaning...
 rm -rf ./dist
 
 echo Building app
+export MOCHA_REPORTER=xunit
+export MOCHA_REPORT=server-tests.xml
 grunt
 rc=$?; if [[ $rc != 0 ]]; then echo "Grunt build failed"; exit $rc; fi
 

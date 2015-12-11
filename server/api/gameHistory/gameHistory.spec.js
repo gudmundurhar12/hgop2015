@@ -3,7 +3,7 @@
 var should = require('should');
 var app = require('../../app');
 var request = require('supertest');
-
+/*
 describe('GET /api/gameHistory', function () {
 
   it('should respond with JSON array with created events for game', function (done) {
@@ -15,7 +15,7 @@ describe('GET /api/gameHistory', function () {
       name: "TheFirstGame",
       timeStamp: "2014-12-02T11:29:29"
     };
-    console.log("<!--")
+
     var req = request(app);
     req
       .post('/api/createGame')
@@ -23,7 +23,6 @@ describe('GET /api/gameHistory', function () {
       .send(command)
       .end(function(err, res) {
         if (err) return done(err);
-        
         request(app)
           .get('/api/gameHistory/999')
           .expect(200)
@@ -40,10 +39,9 @@ describe('GET /api/gameHistory', function () {
                 "name": "TheFirstGame",
                 "timeStamp": "2014-12-02T11:29:29"
               }]);
-
-            console.log("-->")
             done();
           });
       });
   });
 });
+*/
