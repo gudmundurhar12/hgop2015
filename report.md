@@ -56,3 +56,16 @@ Hægt er að keyra test_deploy.sh script til að setja nýjustu útgáfu af dock
   √ Should play 200 games in 10 seconds. (7397ms)
 
   1 passing (7s)
+
+Þeir leikir sem eru búnir til og prufaðir í álagsprófinu eru allir spilaðir á sama tíma, þannig að þeir keyra í "parallel" . NoteJS notar asynchronous non-blocking IO köll, þannig að allar skipanir, sem eru í for lykkjunni, eru sendar afstað en ferlið bíður ekki eftir svari. Þegar svarið berst er QED fallið keyrt sem kallar á done() fallið þegar fjölda leikja er náð.
+
+Hægt er t.d. að sjá þetta á server loggnum:
+
+GET /api/gameHistory/133 200 116ms
+GET /api/gameHistory/145 200 142ms
+GET /api/gameHistory/138 200 116ms
+GET /api/gameHistory/147 200 115ms
+GET /api/gameHistory/146 200 115ms
+GET /api/gameHistory/144 200 112ms
+
+Hér sést að gameId eru ekki í hækkandi röð, sem væri ekki tilfellið ef prófin myndu keyra hvert á eftir öðru.
