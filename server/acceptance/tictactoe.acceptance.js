@@ -133,7 +133,7 @@ describe('TEST ENV GET /api/gameHistory', function () {
 
     var command =     {
       id : "1",
-      gameId : "888",
+      gameId : "8888",
       command: "CreateGame",
       userName: "Gummi",
       name: "FirstGame",
@@ -150,7 +150,7 @@ describe('TEST ENV GET /api/gameHistory', function () {
           return done(err);
         }
         request(acceptanceUrl)
-          .get('/api/gameHistory/888')
+          .get('/api/gameHistory/8888')
           .expect(200)
           .expect('Content-Type', /json/)
           .end(function (err, res) {
@@ -161,7 +161,7 @@ describe('TEST ENV GET /api/gameHistory', function () {
             should(res.body).eql(
               [{
                 "id": "1",
-                "gameId": "888",
+                "gameId": "8888",
                 "event": "GameCreated",
                 "userName": "Gummi",
                 "name": "FirstGame",
@@ -173,18 +173,20 @@ describe('TEST ENV GET /api/gameHistory', function () {
   });
 
   it('Should result in Draw', function (done) {
-    given(user("Gummi").createsGame("12").named("ThirdGame"))
-    .and(user("Jonni").joinsGame("12").named("ThirdGame"))
-    .and(user("Gummi").placesMove("12", 0, 0, "X"))
-    .and(user("Jonni").placesMove("12", 0, 2, "O"))
-    .and(user("Gummi").placesMove("12", 0, 1, "X"))
-    .and(user("Jonni").placesMove("12", 1, 0, "O"))
-    .and(user("Gummi").placesMove("12", 1, 2, "X"))
-    .and(user("Jonni").placesMove("12", 1, 1, "O"))
-    .and(user("Gummi").placesMove("12", 2, 0, "X"))
-    .and(user("Jonni").placesMove("12", 2, 1, "O"))
-    .and(user("Gummi").placesMove("12", 2, 2, "X"))
+    given(user("Gummi").createsGame("1212").named("ThirdGame"))
+    .and(user("Jonni").joinsGame("1212").named("ThirdGame"))
+    .and(user("Gummi").placesMove("1212", 0, 0, "X"))
+    .and(user("Jonni").placesMove("1212", 0, 2, "O"))
+    .and(user("Gummi").placesMove("1212", 0, 1, "X"))
+    .and(user("Jonni").placesMove("1212", 1, 0, "O"))
+    .and(user("Gummi").placesMove("1212", 1, 2, "X"))
+    .and(user("Jonni").placesMove("1212", 1, 1, "O"))
+    .and(user("Gummi").placesMove("1212", 2, 0, "X"))
+    .and(user("Jonni").placesMove("1212", 2, 1, "O"))
+    .and(user("Gummi").placesMove("1212", 2, 2, "X"))
     .expect("Game Draw").byUser("Gummi").markOnCell(2, 2, "X").isOk(done);
   });
 
 });
+module.exports.user = user;
+module.exports.given = given;
