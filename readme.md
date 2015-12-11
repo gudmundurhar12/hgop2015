@@ -1,10 +1,13 @@
 HGOP Project Template (TicTacToe) 
 =========
-# Test and Build status
-[![Build Status](http://178.62.75.111/job/tictactoe%20-%20test%20and%20build/badge/icon)](http://178.62.75.111/job/tictactoe%20-%20test%20and%20build/)
+# Commit stage status
+[![Build Status](http://178.62.75.111/job/TicTacToe%20-%20Commit%20stage/badge/icon)](http://178.62.75.111/job/TicTacToe%20-%20Commit%20stage/)	
 
-# Acceptance Test and deploy to production status
-[![Build Status](http://178.62.75.111/job/deploy/badge/icon)](http://178.62.75.111/job/deploy/)
+# Acceptance stage status
+[![Build Status](http://178.62.75.111/job/TicTacToe%20-%20Acceptance%20stage/badge/icon)](http://178.62.75.111/job/TicTacToe%20-%20Acceptance%20stage/)
+
+# Capacity test status
+[![Build Status](http://178.62.75.111/job/TicTacToe%20-%20Load%20Test/badge/icon)](http://178.62.75.111/job/TicTacToe%20-%20Load%20Test/)
 
 ### Project backlog
 

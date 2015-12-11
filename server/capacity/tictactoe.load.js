@@ -1,10 +1,10 @@
 var user = require('../fluid-api/tictactoeFluidApi').user;
 var given = require('../fluid-api/tictactoeFluidApi').given;
 
-it('Should play 1000 games in x seconds.', function (done) {
+it('Should play 200 games in 10.4 seconds.', function (done) {
   var doneCount = 0;
-  var gamesToPlay = 1000;
-  var x = 30;
+  var gamesToPlay = 200;
+  var x = 10.4;
 
   this.timeout(x * 1000);
 

@@ -27,3 +27,32 @@ Bower er sambærilegt tól við npm en er fyrir JavaScript. Þ.e. það einfalda
 
 Eins og verkefnið er núna þú eru tvær virtual vélar keyrandi, ein dev vél og svo önnur test vél.
 Hægt er að keyra test_deploy.sh script til að setja nýjustu útgáfu af docker mynd inn á dockerhup, ssh-að inn á test vélina og nýjasta útgáfa af docker myndinni sótt og sett up.
+
+
+## Capacity
+
+### Testruns
+
+  √ Should play 200 games in 10 seconds. (7710ms)
+
+  1 passing (8s)
+
+  √ Should play 200 games in 10 seconds. (5665ms)
+
+  1 passing (6s)
+
+  √ Should play 200 games in 10 seconds. (5984ms)
+
+  1 passing (6s)
+
+  √ Should play 200 games in 10 seconds. (7463ms)
+
+  1 passing (7s)
+
+  √ Should play 200 games in 10 seconds. (5424ms)
+
+  1 passing (5s)
+
+  √ Should play 200 games in 10 seconds. (7397ms)
+
+  1 passing (7s)
