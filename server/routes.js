@@ -16,7 +16,6 @@ module.exports = function(app, config) {
   });
 
   app.use('/api/gameHistory', require('./api/gameHistory')(eventStore).router);
-  app.use('/api/things', require('./api/thing'));
   app.use('/api/joinGame', require('./api/joinGame')(eventStore).router);
   app.use('/api/placeMove', require('./api/placeMove')(eventStore).router);
   app.use('/api/createGame', require('./api/createGame')(eventStore).router);

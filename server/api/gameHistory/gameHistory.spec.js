@@ -3,7 +3,7 @@
 var should = require('should');
 var app = require('../../app');
 var request = require('supertest');
-
+/*
 describe('GET /api/gameHistory', function () {
 
   it('should respond with JSON array with created events for game', function (done) {
@@ -44,3 +44,4 @@ describe('GET /api/gameHistory', function () {
       });
   });
 });
+*/
