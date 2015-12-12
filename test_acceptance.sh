@@ -12,4 +12,4 @@ sleep 2
 grunt mochaTest:acceptance
 rc=$?; if [[ $rc != 0 ]]; then echo "Acceptance test failed"; exit $rc; fi
 
-export $GIT_PREVIOUS_SUCCESSFUL_COMMIT=$GIT_COMMIT
+export $GIT_PREVIOUS_SUCCESSFUL_COMMIT=$(echo $GIT_COMMIT)
