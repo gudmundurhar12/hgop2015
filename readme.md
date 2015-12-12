@@ -1,5 +1,8 @@
 HGOP Project Template (TicTacToe) 
 =========
+# Build Pipeline
+[Build Pipeline](http://178.62.75.111/view/Hagn%C3%BDt%20g%C3%A6%C3%B0astj%C3%B3rnun%20og%20pr%C3%B3fanir%202015/)
+
 # Commit stage status
 [![Build Status](http://178.62.75.111/job/TicTacToe%20-%20Commit%20stage/badge/icon)](http://178.62.75.111/job/TicTacToe%20-%20Commit%20stage/)	
 
