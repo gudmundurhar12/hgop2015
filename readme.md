@@ -12,6 +12,9 @@ HGOP Project Template (TicTacToe)
 # Capacity test status
 [![Build Status](http://178.62.75.111/job/TicTacToe%20-%20Load%20Test/badge/icon)](http://178.62.75.111/job/TicTacToe%20-%20Load%20Test/)
 
+# Deployment status
+[![Build Status](http://178.62.75.111/job/TicTacToe%20-%20Deploy/badge/icon)](http://178.62.75.111/job/TicTacToe%20-%20Deploy/)
+
 ### Project backlog
 
 *	Can update latest version in production by push of a button

@@ -69,3 +69,17 @@ GET /api/gameHistory/146 200 115ms
 GET /api/gameHistory/144 200 112ms
 
 Hér sést að gameId eru ekki í hækkandi röð, sem væri ekki tilfellið ef prófin myndu keyra hvert á eftir öðru.
+
+## Traceability, production env and deploy any version
+
+What does this give us? Who would use the capability to track versions and why? Who would use capability to deploy any version and why?
+
+Þetta gerir okkur kleift að eiga lista af docker myndum sem eru merktar með commit auðkenni frá GitHub. Þetta býður uppá að hægt er að tryggja hvaða docker myndir eru stöðugar og óhætt að setja í production útfrá commit sögunni á GitHub og build sögunni í Jenkins.
+
+What was wrong with having docker push in the deployment script rather than in the dockerbuild.sh script?
+
+Það að láta deployment skriptuna setja docker myndina inná dockerhub var ekki hentugt, þar sem að deployment skriptan á bara að sjá um að setja docker mynd í production óháð því hvenær sú mynd var sett inn á dockerhub.
+
+How does the "deploy any version, anywhere" build feature work? Hint: Track GIT_COMMIT
+
+Skil ekki spurninguna. 
