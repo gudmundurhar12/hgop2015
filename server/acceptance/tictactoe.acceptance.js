@@ -19,7 +19,10 @@ describe('TEST ENV GET /api/gameHistory', function () {
       id : "1",
       gameId : "8888",
       command: "CreateGame",
-      userName: "Gummi",
+      user: {
+        userName: 'Gummi',
+        side: 'X'
+      },
       name: "FirstGame",
       timeStamp: "2015-12-07T11:29:29"
     };
@@ -47,7 +50,10 @@ describe('TEST ENV GET /api/gameHistory', function () {
                 "id": "1",
                 "gameId": "8888",
                 "event": "GameCreated",
-                "userName": "Gummi",
+                "user": {
+                  "userName": 'Gummi',
+                  "side": 'X'
+                },
                 "name": "FirstGame",
                 "timeStamp": "2015-12-07T11:29:29"
               }]);

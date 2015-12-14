@@ -45,12 +45,14 @@ function user(nameOfUser){
       cmd.command = "MakeMove";
       cmd.x = x;
       cmd.y = y;
-      cmd.side = token; 
+      cmd.user.side = token; 
 
       return cmd;
     },
     id : "0",
-    userName : nameOfUser,
+    user: {
+        userName: nameOfUser
+    },
     timeStamp: "2015-12-07T11:29:29"
 
   };
@@ -81,13 +83,13 @@ function given(cmd){
       return givenApi;
     },
     byUser: function(userName) {
-      expectations[expectations.length - 1].userName = userName;
+      expectations[expectations.length - 1].user = {userName: userName};
       return givenApi;
     },
     markOnCell: function(x,y,token){
       expectations[expectations.length - 1].x = x;
       expectations[expectations.length - 1].y = y;
-      expectations[expectations.length - 1].side = token;
+      expectations[expectations.length - 1].user.side = token;
       return givenApi;
     },
     isOk: function(done){
