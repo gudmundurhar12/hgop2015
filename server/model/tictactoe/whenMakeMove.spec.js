@@ -9,7 +9,10 @@ describe('MakeMove command', function(){
       id:"0",
       gameId: "1",
       event:"GameCreated",
-      userName: "Gummi",
+      user : {
+        userName:'Gummi',
+        side: 'X'
+      },
       name:"FirstGame",
       timeStamp: "2015.12.03T11:30:00"
     },
@@ -17,8 +20,10 @@ describe('MakeMove command', function(){
       id:"01",
       gameId: "1",
       event:"GameJoined",
-      userName : "Jonni",
-      otherUserName: "Gummi",
+      user : {
+        userName:'Jonni',
+        side: 'O'
+      },
       timeStamp: "2015.12.03T11:40:00"
     }];
   });
@@ -28,21 +33,25 @@ describe('MakeMove command', function(){
       id:"011",
       gameId: "1",
       command:"MakeMove",
-      userName : "Jonni",
+      user : {
+        userName:'Jonni',
+        side: 'O'
+      },
       x:0,
       y:0,
-      side:'X',
       timeStamp: "2015.12.03T12:00:00"
     };
     then=[{
       id:"011",
       gameId: "1",
       event:"MoveMade",
-      userName:"Jonni",
+      user : {
+        userName:'Jonni',
+        side: 'O'
+      },
       name:"FirstGame",
       x:0,
       y:0,
-      side:'X',
       timeStamp: "2015.12.03T12:00:00"
     }];
 
@@ -56,30 +65,36 @@ describe('MakeMove command', function(){
       id:"011",
       gameId: "1",
       event:"MoveMade",
-      userName:"Jonni",
+      user : {
+        userName:'Jonni',
+        side: 'O'
+      },
       name:"FirstGame",
       x:0,
       y:0,
-      side:'X',
       timeStamp: "2015.12.03T12:00:00"
     });
     when={
       id:"0110",
       gameId: "1",
       command:"MakeMove",
-      userName : "Jonni",
+      user : {
+        userName:'Jonni',
+        side: 'O'
+      },
       x:0,
       y:1,
-      side:'X',
       timeStamp: "2015.12.03T12:01:00"
     };
     then=[{
       id:"0110",
       gameId: "1",
       event:"NotPlayersTurn",
-      userName:"Jonni",
+      user : {
+        userName:'Jonni',
+        side: 'O'
+      },
       name:"FirstGame",
-      side:'X',
       timeStamp: "2015.12.03T12:01:00"
     }];
 
@@ -93,32 +108,38 @@ describe('MakeMove command', function(){
       id:"011",
       gameId: "1",
       event:"MoveMade",
-      userName:"Jonni",
+      user : {
+        userName:'Jonni',
+        side: 'O'
+      },
       name:"FirstGame",
       x:0,
       y:0,
-      side:'X',
       timeStamp: "2015.12.03T12:00:00"
     });
     when={
       id:"0111",
       gameId: "1",
       command:"MakeMove",
-      userName : "Gummi",
+      user : {
+        userName:'Gummi',
+        side: 'X'
+      },
       x:0,
       y:1,
-      side:'O',
       timeStamp: "2015.12.03T12:01:00"
     };
     then=[{
       id:"0111",
       gameId: "1",
       event:"MoveMade",
-      userName:"Gummi",
+      user : {
+        userName:'Gummi',
+        side: 'X'
+      },
       name:"FirstGame",
       x:0,
       y:1,
-      side:'O',
       timeStamp: "2015.12.03T12:01:00"
     }];
 
@@ -132,30 +153,36 @@ describe('MakeMove command', function(){
       id:"011",
       gameId: "1",
       event:"MoveMade",
-      userName:"Jonni",
+      user : {
+        userName:'Jonni',
+        side: 'O'
+      },
       name:"FirstGame",
       x:0,
       y:0,
-      side:'X',
       timeStamp: "2015.12.03T12:00:00"
     });
     when={
       id:"0112",
       gameId: "1",
       command:"MakeMove",
-      userName : "Gummi",
+      user : {
+        userName:'Gummi',
+        side: 'X'
+      },
       x:0,
       y:0,
-      side:'O',
       timeStamp: "2015.12.03T12:01:00"
     };
     then=[{
       id:"0112",
       gameId: "1",
       event:"IllegalMove",
-      userName:"Gummi",
+      user : {
+        userName:'Gummi',
+        side: 'X'
+      },
       name:"FirstGame",
-      side:'O',
       timeStamp: "2015.12.03T12:01:00"
     }];
 
@@ -171,65 +198,77 @@ it('Player should win on Diagonal \\ ',function(){
       id:"011",
       gameId: "1",
       event:"MoveMade",
-      userName:"Jonni",
+      user : {
+        userName:'Jonni',
+        side: 'O'
+      },
       name:"FirstGame",
       x:0,
       y:0,
-      side:'X',
       timeStamp: "2015.12.03T14:00:00"
     },
     {
       id:"012",
       gameId: "1",
       event:"MoveMade",
-      userName:"Gummi",
+      user : {
+        userName:'Gummi',
+        side: 'X'
+      },
       name:"FirstGame",
       x:0,
       y:1,
-      side:'O',
       timeStamp: "2015.12.03T14:01:00"
     },
     {
       id:"013",
       gameId: "1",
       event:"MoveMade",
-      userName:"Jonni",
+      user : {
+        userName:'Jonni',
+        side: 'O'
+      },
       name:"FirstGame",
       x:1,
       y:1,
-      side:'X',
       timeStamp: "2015.12.03T14:02:00"
     },
     {
       id:"014",
       gameId: "1",
       event:"MoveMade",
-      userName:"Gummi",
+      user : {
+        userName:'Gummi',
+        side: 'X'
+      },
       name:"FirstGame",
       x:0,
       y:2,
-      side:'O',
       timeStamp: "2015.12.03T14:03:00"
     });
     when={
       id:"015",
       gameId: "1",
       command:"MakeMove",
-      userName : "Jonni",
+      user : {
+        userName:'Jonni',
+        side: 'O'
+      },
       x:2,
       y:2,
-      side:'X',
       timeStamp: "2015.12.03T14:04:00"
     };
     then=[{
       id:"015",
       gameId: "1",
       event:"Game Won",
-      userName:"Jonni",
+      user : {
+        userName:'Jonni',
+        side: 'O'
+      },
       name:"FirstGame",
       x:2,
       y:2,
-      side:'X',
       timeStamp: "2015.12.03T14:04:00"
     }];
 
@@ -243,65 +282,77 @@ it('Player should win on Diagonal \\ ',function(){
       id:"011",
       gameId: "1",
       event:"MoveMade",
-      userName:"Jonni",
+      user : {
+        userName:'Jonni',
+        side: 'O'
+      },
       name:"FirstGame",
       x:0,
       y:2,
-      side:'X',
       timeStamp: "2015.12.03T14:00:00"
     },
     {
       id:"012",
       gameId: "1",
       event:"MoveMade",
-      userName:"Gummi",
+      user : {
+        userName:'Gummi',
+        side: 'X'
+      },
       name:"FirstGame",
       x:0,
       y:1,
-      side:'O',
       timeStamp: "2015.12.03T14:01:00"
     },
     {
       id:"013",
       gameId: "1",
       event:"MoveMade",
-      userName:"Jonni",
+      user : {
+        userName:'Jonni',
+        side: 'O'
+      },
       name:"FirstGame",
       x:1,
       y:1,
-      side:'X',
       timeStamp: "2015.12.03T14:02:00"
     },
     {
       id:"014",
       gameId: "1",
       event:"MoveMade",
-      userName:"Gummi",
+      user : {
+        userName:'Gummi',
+        side: 'X'
+      },
       name:"FirstGame",
       x:0,
       y:0,
-      side:'O',
       timeStamp: "2015.12.03T14:03:00"
     });
     when={
       id:"015",
       gameId: "1",
       command:"MakeMove",
-      userName : "Jonni",
+      user : {
+        userName:'Jonni',
+        side: 'O'
+      },
       x:2,
       y:0,
-      side:'X',
       timeStamp: "2015.12.03T14:04:00"
     };
     then=[{
       id:"015",
       gameId: "1",
       event:"Game Won",
-      userName:"Jonni",
+      user : {
+        userName:'Jonni',
+        side: 'O'
+      },
       name:"FirstGame",
       x:2,
       y:0,
-      side:'X',
       timeStamp: "2015.12.03T14:04:00"
     }];
 
@@ -315,109 +366,129 @@ it('Player should win on Diagonal \\ ',function(){
       id:"011",
       gameId: "1",
       event:"MoveMade",
-      userName:"Jonni",
+      user : {
+        userName:'Jonni',
+        side: 'O'
+      },
       name:"FirstGame",
       x:0,
       y:0,
-      side:'X',
       timeStamp: "2015.12.03T15:00:00"
     },
     {
       id:"012",
       gameId: "1",
       event:"MoveMade",
-      userName:"Gummi",
+      user : {
+        userName:'Gummi',
+        side: 'X'
+      },
       name:"FirstGame",
       x:0,
       y:2,
-      side:'O',
       timeStamp: "2015.12.03T15:01:00"
     },
     {
       id:"013",
       gameId: "1",
       event:"MoveMade",
-      userName:"Jonni",
+      user : {
+        userName:'Jonni',
+        side: 'O'
+      },
       name:"FirstGame",
       x:0,
       y:1,
-      side:'X',
       timeStamp: "2015.12.03T15:02:00"
     },
     {
       id:"014",
       gameId: "1",
       event:"MoveMade",
-      userName:"Gummi",
+      user : {
+        userName:'Gummi',
+        side: 'X'
+      },
       name:"FirstGame",
       x:1,
       y:0,
-      side:'O',
       timeStamp: "2015.12.03T15:03:00"
     },
     {
       id:"015",
       gameId: "1",
       event:"MoveMade",
-      userName:"Jonni",
+      user : {
+        userName:'Jonni',
+        side: 'O'
+      },
       name:"FirstGame",
       x:1,
       y:2,
-      side:'X',
       timeStamp: "2015.12.03T15:02:00"
     },
     {
       id:"016",
       gameId: "1",
       event:"MoveMade",
-      userName:"Gummi",
+      user : {
+        userName:'Gummi',
+        side: 'X'
+      },
       name:"FirstGame",
       x:1,
       y:1,
-      side:'O',
       timeStamp: "2015.12.03T15:03:00"
     },
     {
       id:"017",
       gameId: "1",
       event:"MoveMade",
-      userName:"Jonni",
+      user : {
+        userName:'Jonni',
+        side: 'O'
+      },
       name:"FirstGame",
       x:2,
       y:0,
-      side:'X',
       timeStamp: "2015.12.03T15:02:00"
     },
     {
       id:"018",
       gameId: "1",
       event:"MoveMade",
-      userName:"Gummi",
+      user : {
+        userName:'Gummi',
+        side: 'X'
+      },
       name:"FirstGame",
       x:2,
       y:1,
-      side:'O',
       timeStamp: "2015.12.03T15:03:00"
     });
     when={
       id:"019",
       gameId: "1",
       command:"MakeMove",
-      userName : "Jonni",
+      user : {
+        userName:'Jonni',
+        side: 'O'
+      },
       x:2,
       y:2,
-      side:'X',
       timeStamp: "2015.12.03T15:04:00"
     };
     then=[{
       id:"019",
       gameId: "1",
       event:"Game Draw",
-      userName:"Jonni",
+      user : {
+        userName:'Jonni',
+        side: 'O'
+      },
       name:"FirstGame",
       x:2,
       y:2,
-      side:'X',
       timeStamp: "2015.12.03T15:04:00"
     }];
 
@@ -440,7 +511,10 @@ function _Fn(value){
         id:"0",
         gameId: "1",
         event:"GameCreated",
-        userName: "Gummi",
+        user : {
+          userName:'Gummi',
+          side: 'X'
+        },
         name:"FirstGame",
         timeStamp: "2015.12.03T11:30:00"
       },
@@ -448,8 +522,10 @@ function _Fn(value){
         id:"01",
         gameId: "1",
         event:"GameJoined",
-        userName : "Jonni",
-        otherUserName: "Gummi",
+        user : {
+          userName:'Jonni',
+          side: 'O'
+        },
         timeStamp: "2015.12.03T11:40:00"
       }];
     });
@@ -460,65 +536,77 @@ function _Fn(value){
         id:"011",
         gameId: "1",
         event:"MoveMade",
-        userName:"Jonni",
+        user : {
+          userName:'Jonni',
+          side: 'O'
+        },
         name:"FirstGame",
         x:0,
         y: value,
-        side:'X',
         timeStamp: "2015.12.03T12:00:00"
       },
       {
         id:"012",
         gameId: "1",
         event:"MoveMade",
-        userName:"Gummi",
+        user : {
+          userName:'Gummi',
+          side: 'X'
+        },
         name:"FirstGame",
         x: Math.max(0, 1-value),
         y: Math.max(0, 1-value),
-        side:'O',
         timeStamp: "2015.12.03T12:01:00"
       },
       {
         id:"013",
         gameId: "1",
         event:"MoveMade",
-        userName:"Jonni",
+        user : {
+          userName:'Jonni',
+          side: 'O'
+        },
         name:"FirstGame",
         x:2,
         y: value,
-        side:'X',
         timeStamp: "2015.12.03T12:02:00"
       },
       {
         id:"014",
         gameId: "1",
         event:"MoveMade",
-        userName:"Gummi",
+        user : {
+          userName:'Gummi',
+          side: 'X'
+        },
         name:"FirstGame",
         x: Math.max(0, 1-value) + 1,
         y: Math.max(0, 1-value),
-        side:'O',
         timeStamp: "2015.12.03T12:03:00"
       });
       when={
         id:"015",
         gameId: "1",
         command:"MakeMove",
-        userName : "Jonni",
+        user : {
+          userName:'Jonni',
+          side: 'O'
+        },
         x:1,
         y: value,
-        side:'X',
         timeStamp: "2015.12.03T12:04:00"
       };
       then=[{
         id:"015",
         gameId: "1",
         event:"Game Won",
-        userName:"Jonni",
+        user : {
+          userName:'Jonni',
+          side: 'O'
+        },
         name:"FirstGame",
         x:1,
         y: value,
-        side:'X',
         timeStamp: "2015.12.03T12:04:00"
       }];
 
@@ -532,65 +620,77 @@ function _Fn(value){
         id:"011",
         gameId: "1",
         event:"MoveMade",
-        userName:"Jonni",
+        user : {
+          userName:'Jonni',
+          side: 'O'
+        },
         name:"FirstGame",
         x: value,
         y:0,
-        side:'X',
         timeStamp: "2015.12.03T13:00:00"
       },
       {
         id:"012",
         gameId: "1",
         event:"MoveMade",
-        userName:"Gummi",
+        user : {
+          userName:'Gummi',
+          side: 'X'
+        },
         name:"FirstGame",
         x: Math.max(0, 1-value),
         y: Math.max(0, 1-value),
-        side:'O',
         timeStamp: "2015.12.03T13:01:00"
       },
       {
         id:"013",
         gameId: "1",
         event:"MoveMade",
-        userName:"Jonni",
+        user : {
+          userName:'Jonni',
+          side: 'O'
+        },
         name:"FirstGame",
         x: value,
         y:2,
-        side:'X',
         timeStamp: "2015.12.03T13:02:00"
       },
       {
         id:"014",
         gameId: "1",
         event:"MoveMade",
-        userName:"Gummi",
+        user : {
+          userName:'Gummi',
+          side: 'X'
+        },
         name:"FirstGame",
         x: Math.max(0, 1-value),
         y: Math.max(0, 1-value) + 1,
-        side:'O',
         timeStamp: "2015.12.03T13:03:00"
       });
       when={
         id:"015",
         gameId: "1",
         command:"MakeMove",
-        userName : "Jonni",
+        user : {
+          userName:'Jonni',
+          side: 'O'
+        },
         x:value,
         y:1,
-        side:'X',
         timeStamp: "2015.12.03T13:04:00"
       };
       then=[{
         id:"015",
         gameId: "1",
         event:"Game Won",
-        userName:"Jonni",
+        user : {
+          userName:'Jonni',
+          side: 'O'
+        },
         name:"FirstGame",
         x:value,
         y:1,
-        side:'X',
         timeStamp: "2015.12.03T13:04:00"
       }];
 

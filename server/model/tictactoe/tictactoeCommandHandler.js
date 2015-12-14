@@ -10,7 +10,7 @@ module.exports = function tictactoeCommandHandler(events) {
   
   var gameEvents={
     'MoveMade': function(gameEvent){
-      gameState.gameBoard[gameEvent.x][gameEvent.y] = gameEvent.side;
+      gameState.gameBoard[gameEvent.x][gameEvent.y] = gameEvent.user.side;
     }
   };
 
@@ -27,7 +27,7 @@ module.exports = function tictactoeCommandHandler(events) {
           id: cmd.id,
           gameId: cmd.gameId,
           event:"GameCreated",
-          userName: cmd.userName,
+          user: cmd.user,
           name: cmd.name,
           timeStamp: cmd.timeStamp
         }];
@@ -38,7 +38,7 @@ module.exports = function tictactoeCommandHandler(events) {
           id: cmd.id,
           gameId : cmd.gameId,
           event:"GameWithIdExists",
-          userName: cmd.userName,
+          user: cmd.user,
           timeStamp: cmd.timeStamp
         }];
       }
@@ -51,7 +51,7 @@ module.exports = function tictactoeCommandHandler(events) {
           id: cmd.id,
           gameId: cmd.gameId,
           event: "GameDoesNotExist",
-          userName: cmd.userName,
+          user: cmd.user,
           timeStamp: cmd.timeStamp
         }];
       }
@@ -60,7 +60,7 @@ module.exports = function tictactoeCommandHandler(events) {
           id: cmd.id,
           gameId: cmd.gameId,
           event: "GameFull",
-          userName: cmd.userName,
+          user: cmd.user,
           timeStamp: cmd.timeStamp
         }];
       }
@@ -68,8 +68,7 @@ module.exports = function tictactoeCommandHandler(events) {
         id: cmd.id,
         gameId: cmd.gameId,
         event: "GameJoined",
-        userName: cmd.userName,
-        otherUserName: gameState.gameCreatedEvent.userName,
+        user: cmd.user,
         timeStamp: cmd.timeStamp
       }];
       
@@ -80,15 +79,14 @@ module.exports = function tictactoeCommandHandler(events) {
      var lastMove = gameState.gameLastMove
 
      // Make sure that the same player doesn't make two moves in a row
-     if(lastMove.userName !== undefined){
-        if(gameState.gameLastMove.userName === cmd.userName && lastMove.event !== "GameJoined"){
+     if(lastMove.user !== undefined){
+        if(gameState.gameLastMove.user.userName === cmd.user.userName && lastMove.event !== "GameJoined"){
           return [{
             id: cmd.id,
             gameId: cmd.gameId,
             event:"NotPlayersTurn",
-            userName: cmd.userName,
+            user: cmd.user,
             name: gameState.gameCreatedEvent.name,
-            side: cmd.side,
             timeStamp: cmd.timeStamp
           }];
         }
@@ -100,9 +98,8 @@ module.exports = function tictactoeCommandHandler(events) {
             id: cmd.id,
             gameId: cmd.gameId,
             event:"IllegalMove",
-            userName: cmd.userName,
+            user: cmd.user,
             name: gameState.gameCreatedEvent.name,
-            side: cmd.side,
             timeStamp: cmd.timeStamp
           }];
       }
@@ -113,25 +110,24 @@ module.exports = function tictactoeCommandHandler(events) {
               id: cmd.id,
               gameId: cmd.gameId,
               event: "Game Won",
-              userName: cmd.userName,
+              user: cmd.user,
               name: gameState.gameCreatedEvent.name,
               x : cmd.x,
               y : cmd.y,
-              side: cmd.side,
               timeStamp: cmd.timeStamp
             }];
 
       var draw = true;
 
       if(gameBoard[cmd.x][cmd.y] === ''){
-        gameBoard[cmd.x][cmd.y] = cmd.side;
+        gameBoard[cmd.x][cmd.y] = cmd.user.side;
 
         // Check for horizontal and vertical wins
         for(var i = 0 ; i < gameBoard.length ; i++){
-          if(gameBoard[0][i] === cmd.side && gameBoard[1][i] === cmd.side && gameBoard[2][i] === cmd.side ){
+          if(gameBoard[0][i] === cmd.user.side && gameBoard[1][i] === cmd.user.side && gameBoard[2][i] === cmd.user.side ){
             return gameWin;
           }
-          if(gameBoard[i][0] === cmd.side && gameBoard[i][1] === cmd.side && gameBoard[i][2] === cmd.side ){
+          if(gameBoard[i][0] === cmd.user.side && gameBoard[i][1] === cmd.user.side && gameBoard[i][2] === cmd.user.side ){
             return gameWin;
           }
           for(var j = 0 ; j < gameBoard[i].length ; j++){
@@ -142,11 +138,11 @@ module.exports = function tictactoeCommandHandler(events) {
         }
 
         // Check for diagonal wins
-        if(gameBoard[0][0] === cmd.side && gameBoard[1][1] === cmd.side && gameBoard[2][2] === cmd.side){
+        if(gameBoard[0][0] === cmd.user.side && gameBoard[1][1] === cmd.user.side && gameBoard[2][2] === cmd.user.side){
           return gameWin;
         }
 
-        if(gameBoard[0][2] === cmd.side && gameBoard[1][1] === cmd.side && gameBoard[2][0] === cmd.side){
+        if(gameBoard[0][2] === cmd.user.side && gameBoard[1][1] === cmd.user.side && gameBoard[2][0] === cmd.user.side){
           return gameWin;
         }
         if(!draw){
@@ -154,11 +150,10 @@ module.exports = function tictactoeCommandHandler(events) {
             id: cmd.id,
             gameId: cmd.gameId,
             event: "MoveMade",
-            userName: cmd.userName,
+            user: cmd.user,
             name: gameState.gameCreatedEvent.name,
             x : cmd.x,
             y : cmd.y,
-            side : cmd.side,
             timeStamp: cmd.timeStamp
           }];
         }
@@ -167,11 +162,10 @@ module.exports = function tictactoeCommandHandler(events) {
             id: cmd.id,
             gameId: cmd.gameId,
             event: "Game Draw",
-            userName: cmd.userName,
+            user: cmd.user,
             name: gameState.gameCreatedEvent.name,
             x : cmd.x,
             y : cmd.y,
-            side : cmd.side,
             timeStamp: cmd.timeStamp
           }];
         }
