@@ -6,7 +6,6 @@ i vél" vandamál og villur.
 ##VirtualBox
 
 VirtualBox er til að keyra virtual stýrikerfi af hvaða tegund sem er á hvaða stýrikerfi sem er. Þ.a. ég get verið með windows sett up á tölvunni minn og sett up virtual mynd af Ubuntu sem að leyfir mér að nota allt sem Ubuntu bíður uppá. 
-
 ##Grunt
 
 Grunt er tól sem að keyrir "verkefni" fyrir JavaScript verkefni. Með verkefni á ég við að hann getur t.d. keyrt unit-test, metið kóðann með JSHint, keyrt uglyfy og minify á kóðann o.s.frv. Þ.e. allt sem að ég vill gera við JavaScript projectið mitt til að gera það klárt í production.    
@@ -72,15 +71,15 @@ Hér sést að gameId eru ekki í hækkandi röð, sem væri ekki tilfellið ef 
 
 ## Traceability, production env and deploy any version
 
-### What does this give us? Who would use the capability to track versions and why? Who would use capability to deploy any version and why?
+#### What does this give us? Who would use the capability to track versions and why? Who would use capability to deploy any version and why?
 
 Þetta gerir okkur kleift að eiga lista af docker myndum sem eru merktar með commit auðkenni frá GitHub. Þetta býður uppá að hægt er að tryggja hvaða docker myndir eru stöðugar og óhætt að setja í production útfrá commit sögunni á GitHub og build sögunni í Jenkins.
 
-### What was wrong with having docker push in the deployment script rather than in the dockerbuild.sh script?
+#### What was wrong with having docker push in the deployment script rather than in the dockerbuild.sh script?
 
 Það að láta deployment skriptuna setja docker myndina inná dockerhub var ekki hentugt, þar sem að deployment skriptan á bara að sjá um að setja docker mynd í production óháð því hvenær sú mynd var sett inn á dockerhub.
 
-### How does the "deploy any version, anywhere" build feature work? Hint: Track GIT_COMMIT
+#### How does the "deploy any version, anywhere" build feature work? Hint: Track GIT_COMMIT
 
 Deployment skripan tekur tvö input, fyrst ip töluna af servernum sem á að deploya á og svo GIT_COMMIT auðkennið á sem vísar til dockerhub myndar. Ef deployment pípan sér um allt, þá fær scriptan iptöluna úr skránni deployment_machine og auðkennið úr GIT_PREVIOUS_SUCCESSFUL_COMMIT shell breytunni.
 
