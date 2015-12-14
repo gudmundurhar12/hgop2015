@@ -23,7 +23,7 @@ Node.js er cross-platform umhverfi til að skrifa og þróa vefþjónustur í Ja
 
 Bower er sambærilegt tól við npm en er fyrir JavaScript. Þ.e. það einfaldar og sjálvirknivæðir utanumhald og uppsetningu á JavaScript pökkum.  
 
-## Deployment path topology
+## Deployment path topology - 27.11.2015
 
 Eins og verkefnið er núna þú eru tvær virtual vélar keyrandi, ein dev vél og svo önnur test vél.
 Hægt er að keyra test_deploy.sh script til að setja nýjustu útgáfu af docker mynd inn á dockerhup, ssh-að inn á test vélina og nýjasta útgáfa af docker myndinni sótt og sett up.
@@ -82,7 +82,7 @@ Hér sést að gameId eru ekki í hækkandi röð, sem væri ekki tilfellið ef 
 
 ### How does the "deploy any version, anywhere" build feature work? Hint: Track GIT_COMMIT
 
-Þegar GIT_COMMIT auðkennið á stable build er sett sem GIT_PREVIOUS_SUCCESSFUL_COMMIT þá er sú breyta notuð í final_deploy skriptunni til velja úr dockerhub myndum.
+Deployment skripan tekur tvö input, fyrst ip töluna af servernum sem á að deploya á og svo GIT_COMMIT auðkennið á sem vísar til dockerhub myndar. Ef deployment pípan sér um allt, þá fær scriptan iptöluna úr skránni deployment_machine og auðkennið úr GIT_PREVIOUS_SUCCESSFUL_COMMIT shell breytunni.
 
 
 ## Jenkins shell scripts
