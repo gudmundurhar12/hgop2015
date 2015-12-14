@@ -32,7 +32,7 @@ Hægt er að keyra test_deploy.sh script til að setja nýjustu útgáfu af dock
 ## Capacity
 
 ### Testruns
-
+``` 
   √ Should play 200 games in 10 seconds. (7710ms)
 
   1 passing (8s)
@@ -56,30 +56,70 @@ Hægt er að keyra test_deploy.sh script til að setja nýjustu útgáfu af dock
   √ Should play 200 games in 10 seconds. (7397ms)
 
   1 passing (7s)
-
+``` 
 Þeir leikir sem eru búnir til og prufaðir í álagsprófinu eru allir spilaðir á sama tíma, þannig að þeir keyra í "parallel" . NoteJS notar asynchronous non-blocking IO köll, þannig að allar skipanir, sem eru í for lykkjunni, eru sendar afstað en ferlið bíður ekki eftir svari. Þegar svarið berst er QED fallið keyrt sem kallar á done() fallið þegar fjölda leikja er náð.
 
 Hægt er t.d. að sjá þetta á server loggnum:
-
+``` 
 GET /api/gameHistory/133 200 116ms
 GET /api/gameHistory/145 200 142ms
 GET /api/gameHistory/138 200 116ms
 GET /api/gameHistory/147 200 115ms
 GET /api/gameHistory/146 200 115ms
 GET /api/gameHistory/144 200 112ms
-
+``` 
 Hér sést að gameId eru ekki í hækkandi röð, sem væri ekki tilfellið ef prófin myndu keyra hvert á eftir öðru.
 
 ## Traceability, production env and deploy any version
 
-What does this give us? Who would use the capability to track versions and why? Who would use capability to deploy any version and why?
+### What does this give us? Who would use the capability to track versions and why? Who would use capability to deploy any version and why?
 
 Þetta gerir okkur kleift að eiga lista af docker myndum sem eru merktar með commit auðkenni frá GitHub. Þetta býður uppá að hægt er að tryggja hvaða docker myndir eru stöðugar og óhætt að setja í production útfrá commit sögunni á GitHub og build sögunni í Jenkins.
 
-What was wrong with having docker push in the deployment script rather than in the dockerbuild.sh script?
+### What was wrong with having docker push in the deployment script rather than in the dockerbuild.sh script?
 
 Það að láta deployment skriptuna setja docker myndina inná dockerhub var ekki hentugt, þar sem að deployment skriptan á bara að sjá um að setja docker mynd í production óháð því hvenær sú mynd var sett inn á dockerhub.
 
-How does the "deploy any version, anywhere" build feature work? Hint: Track GIT_COMMIT
+### How does the "deploy any version, anywhere" build feature work? Hint: Track GIT_COMMIT
 
-Skil ekki spurninguna. 
+Þegar GIT_COMMIT auðkennið á stable build er sett sem GIT_PREVIOUS_SUCCESSFUL_COMMIT þá er sú breyta notuð í final_deploy skriptunni til velja úr dockerhub myndum.
+
+
+## Jenkins shell scripts
+
+### TicTacToe - Commit stage
+``` 
+chmod u+x dockerbuild.sh
+./dockerbuild.sh $GIT_COMMIT
+``` 
+
+### TicTacToe - Acceptance stage
+``` 
+cp -R "/var/lib/jenkins/jobs/TicTacToe - Commit stage/workspace" .
+cd workspace
+rm -rf test_reports
+chmod u+x test_acceptance.sh
+export GIT_COMMIT=$(< ./dist/githash.txt)
+./test_acceptance.sh $(< test_machine) 
+
+``` 
+### TicTacToe - Load Test
+``` 
+cp -R "/var/lib/jenkins/jobs/TicTacToe - Commit stage/workspace" .
+cd workspace
+rm -rf test_reports/
+chmod u+x test_load.sh
+./test_load.sh
+``` 
+
+### TicTacToe - Deploy
+``` 
+cp -R "/var/lib/jenkins/jobs/TicTacToe - Commit stage/workspace/final_deploy.sh" .
+cp -R "/var/lib/jenkins/jobs/TicTacToe - Commit stage/workspace/test_machine" .
+echo $GIT_PREVIOUS_SUCCESSFUL_COMMIT
+chmod u+x final_deploy.sh
+./final_deploy.sh $(< test_machine) $GIT_PREVIOUS_SUCCESSFUL_COMMIT
+``` 
+
+
+
