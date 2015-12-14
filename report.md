@@ -113,12 +113,18 @@ chmod u+x test_load.sh
 ``` 
 
 ### TicTacToe - Deploy
+$GIT_PREVIOUS_SUCCESSFUL_COMMIT er sent hingað með því að láta test_acceptance.sh skriptuna (úr Acceptance stage skrefinu) skrifa gildið á $GIT_COMMIT inn í properties skrá sem inniheldur þá línuna 
+``` 
+$GIT_PREVIOUS_SUCCESSFUL_COMMIT = (gildið á $GIT_COMMIT)
+``` 
+Þessi skrá er svo send áfram í Deploy skrefið.
+Þá getur final_deploy.sh lesið gildið á $GIT_PREVIOUS_SUCCESSFUL_COMMIT
+
 ``` 
 cp -R "/var/lib/jenkins/jobs/TicTacToe - Commit stage/workspace/final_deploy.sh" .
-cp -R "/var/lib/jenkins/jobs/TicTacToe - Commit stage/workspace/test_machine" .
-echo $GIT_PREVIOUS_SUCCESSFUL_COMMIT
+cp -R "/var/lib/jenkins/jobs/TicTacToe - Commit stage/workspace/deployment_machine" .
 chmod u+x final_deploy.sh
-./final_deploy.sh $(< test_machine) $GIT_PREVIOUS_SUCCESSFUL_COMMIT
+./final_deploy.sh $(< deployment_machine) $GIT_PREVIOUS_SUCCESSFUL_COMMIT
 ``` 
 
 
